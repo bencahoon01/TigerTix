@@ -9,6 +9,10 @@ export default function EventsPage() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        /**
+        * Fetches all events from the server when the component mounts.
+        * Updates state with events data or sets an error message.
+        */
         const fetchEvents = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events`);
@@ -28,6 +32,11 @@ export default function EventsPage() {
         fetchEvents();
     }, []);
 
+    /**
+     * Handles purchasing a ticket for a given event.
+     * Sends a POST request to the server and updates the UI.
+     * @param {number} eventId - The ID of the event to purchase a ticket for.
+     */
     const handlePurchase = async (eventId) => {
         try {
             const response = await fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events/${eventId}/purchase`, {
