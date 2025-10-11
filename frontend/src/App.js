@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import HomePage from './pages/homePage';
 
 function App() {
   const [events, setEvents] = useState([]);
@@ -16,18 +16,7 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Clemson Campus Events</h1>
-        <h1 className="text-2xl text-blue-600 font-bold">Hello Tailwind!</h1>
-      <ul>
-        {events.map((event) => (
-          <li key={event.id}>
-            {event.name} - {event.date}{' '}
-            <button onClick={() => buyTicket(event.name)}>Buy Ticket</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <HomePage events={events} onBuyTicket={buyTicket} />
   );
 }
 
