@@ -29,19 +29,34 @@ export default function EventsPage() {
 
     return (
         <Layout>
-            <h1>Upcoming Events</h1>
-            <ProductFilter />
+            <div className="bg-white">
+                <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+                    <h1 className="text-2xl font-bold tracking-tight text-gray-900">All Events</h1>
+                    <ProductFilter />
 
-            {loading && <p>Loading events...</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+                    {loading && <p className="mt-4 text-gray-500">Loading events...</p>}
+                    {error && <p className="mt-4 text-red-600">{error}</p>}
 
-            {!loading && !error && (
-                <ul>
-                    {events.map(event => (
-                        <li key={event.id}>{event.name} - {new Date(event.date).toLocaleDateString()}</li>
-                    ))}
-                </ul>
-            )}
+                    {!loading && !error && (
+                        <div className="mt-8 flow-root">
+                            <ul role="list" className="-my-8 divide-y divide-gray-200">
+                                {events.map((event) => (
+                                    <li key={event.id} className="flex py-8">
+                                        <div className="ml-4 flex flex-1 flex-col">
+                                            <div className="flex justify-between text-base font-medium text-gray-900">
+                                                <h3>{event.name}</h3>
+                                                <p className="ml-4">{new Date(event.date).toLocaleDateString()}</p>
+                                            </div>
+                                            <p className="mt-1 text-sm text-gray-500">{event.location}</p>
+                                            <p className="mt-2 text-sm font-semibold text-indigo-600">{event.ticketsAvailable} tickets available</p>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+            </div>
         </Layout>
     );
 }
