@@ -22,4 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-echo "*.sqlite" >> backend/.gitignore
+# SQLite database files
+*.sqlite
+*.sqlite3
+*.db
