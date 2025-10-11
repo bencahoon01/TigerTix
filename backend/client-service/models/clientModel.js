@@ -10,12 +10,19 @@ const db = new sqlite3.Database(dbPath, (err) => {
         console.log("Client service connected to the shared database.");
     }
 });
-// Get all events
+/**
+ * Retrieves all events from the database.
+ * @param {function(Error, Array<object>)} callback - Callback with error and event data.
+ */
 const getEvents = (callback) => {
     db.all('SELECT * FROM events', [], callback);
 };
 
-// Update ticket count
+/**
+ * Decrements the available ticket count for an event.
+ * @param {number} eventId - The ID of the event to update.
+ * @param {function(Error)} callback - Callback called when the update finishes.
+ */
 const updateTicketCount = (eventId, callback) => {
     db.run(
         'UPDATE events SET available_tickets = available_tickets - 1 WHERE id = ?',

@@ -3,6 +3,9 @@ const ClientModel = require('../models/clientModel.js');
 /**
  * GET /api/events
  * Returns all events for clients to view.
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @returns {JSON} 200 with list of events, or 500 with error message.
  */
 const getEvents = async (req, res) => {
     try {
@@ -20,6 +23,9 @@ const getEvents = async (req, res) => {
 /**
  * POST /api/events/:id/purchase
  * Decrements the available tickets for a specific event to simulate a purchase.
+ * @param {object} req - Express request object, expects req.params.id as event ID.
+ * @param {object} res - Express response object.
+ * @returns {JSON} 200 with success message, 400 if invalid ID, or 500 with error message.
  */
 const updateTicketCount = async (req, res) => {
     const idRaw = req.params.id;
