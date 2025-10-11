@@ -23,8 +23,10 @@ import {
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import campus1 from '../assets/campus1.jpg'
+import clemsonLogo from '../assets/Clemson_Tigers_logo.svg'
 
-const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
+const currencies = ['USD']
 const navigation = {
     categories: [
         {
@@ -33,26 +35,18 @@ const navigation = {
                 {
                     name: 'Sporting Events',
                     href: '#',
-                    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-category-01.jpg',
-                    imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
                 },
                 {
                     name: 'Concerts',
                     href: '#',
-                    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-category-02.jpg',
-                    imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
                 },
                 {
                     name: 'Seminars',
                     href: '#',
-                    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-category-03.jpg',
-                    imageAlt: 'Model wearing minimalist watch with black wristband and white watch face.',
                 },
                 {
                     name: 'Activities',
                     href: '#',
-                    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-category-04.jpg',
-                    imageAlt: 'Model opening tan leather long wallet with credit card pockets and cash pouch.',
                 },
             ],
         },
@@ -62,33 +56,24 @@ const navigation = {
                 {
                     name: 'Clemson Band',
                     href: '#',
-                    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-01-men-category-01.jpg',
-                    imageAlt: 'Hats and sweaters on wood shelves next to various colors of t-shirts on hangers.',
                 },
                 {
                     name: 'Campus Recreation',
                     href: '#',
-                    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-01-men-category-02.jpg',
-                    imageAlt: 'Model wearing light heather gray t-shirt.',
                 },
                 {
                     name: 'Clemson Football',
                     href: '#',
-                    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-01-men-category-03.jpg',
-                    imageAlt:
-                        'Grey 6-panel baseball hat with black brim, black mountain graphic on front, and light heather gray body.',
                 },
                 {
                     name: 'Brookes Center',
                     href: '#',
-                    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-01-men-category-04.jpg',
-                    imageAlt: 'Model putting folded cash into slim card holder olive leather wallet with hand stitching.',
                 },
             ],
         },
     ],
     pages: [
-        { name: 'Company', href: '#' },
+        { name: 'About', href: '#' },
         { name: 'Organizers', href: '#' },
     ],
 }
@@ -96,94 +81,77 @@ const collections = [
     {
         name: "Sporting Events",
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-04-collection-01.jpg',
-        imageAlt: 'Woman wearing a comfortable cotton t-shirt.',
     },
     {
         name: "Concerts",
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-04-collection-02.jpg',
-        imageAlt: 'Man wearing a comfortable and casual cotton t-shirt.',
     },
     {
         name: 'Academic Events',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-04-collection-03.jpg',
-        imageAlt: 'Person sitting at a wooden desk with paper note organizer, pencil and tablet.',
     },
 ]
 const trendingProducts = [
     {
         id: 1,
-        name: 'Leather Long Wallet',
-        color: 'Natural',
-        price: '$75',
+        name: 'Clemson vs. South Carolina Football',
+        color: 'Memorial Stadium',
+        price: '$150',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-04-trending-product-02.jpg',
-        imageAlt: 'Hand stitched, orange leather long wallet.',
     },
     {
         id: 2,
-        name: 'Machined Pencil and Pen Set',
-        color: 'Black',
-        price: '$70',
+        name: 'Fall Concert Series: The Tams',
+        color: 'Brooks Center',
+        price: '$25',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-04-trending-product-03.jpg',
-        imageAlt: '12-sided, machined black pencil and pen.',
     },
     {
         id: 3,
-        name: 'Mini-Sketchbooks',
-        color: 'Light Brown',
-        price: '$27',
+        name: 'Guest Speaker: AI in modern world',
+        color: 'Watt Family Innovation Center',
+        price: 'Free',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-04-trending-product-04.jpg',
-        imageAlt: 'Set of three light and dark brown mini sketch books.',
     },
     {
-        id: 3,
-        name: 'Organizer Set',
-        color: 'Walnut',
-        price: '$149',
+        id: 4,
+        name: 'Clemson Basketball vs. Duke',
+        color: 'Littlejohn Coliseum',
+        price: '$50',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-04-trending-product-01.jpg',
-        imageAlt: 'Beautiful walnut organizer set with multiple white compartments',
     },
 ]
 const perks = [
     {
-        name: 'Free returns',
+        name: 'Easy Cancellations',
         imageUrl: 'https://tailwindcss.com/plus-assets/img/ecommerce/icons/icon-returns-light.svg',
-        description: 'Not what you expected? Place it back in the parcel and attach the pre-paid postage stamp.',
+        description: 'Cancel up to 24 hours before the event for a full refund.',
     },
     {
-        name: 'Same day delivery',
+        name: 'Instant Ticket Delivery',
         imageUrl: 'https://tailwindcss.com/plus-assets/img/ecommerce/icons/icon-calendar-light.svg',
-        description:
-            'We offer a delivery service that has never been done before. Checkout today and receive your products within hours.',
+        description: 'Your tickets will be delivered to your email instantly upon purchase.',
     },
     {
-        name: 'All year discount',
+        name: 'Student Discounts',
         imageUrl: 'https://tailwindcss.com/plus-assets/img/ecommerce/icons/icon-gift-card-light.svg',
-        description: 'Looking for a deal? You can use the code "ALLYEAR" at checkout and get money off all year round.',
+        description: 'Login with your Clemson student account to get special discounts.',
     },
     {
-        name: 'For the planet',
+        name: 'Support Clemson',
         imageUrl: 'https://tailwindcss.com/plus-assets/img/ecommerce/icons/icon-planet-light.svg',
-        description: 'We’ve pledged 1% of sales to the preservation and restoration of the natural environment.',
+        description: 'A portion of every purchase goes towards supporting Clemson University programs.',
     },
 ]
 const footerNavigation = {
-    products: [
-        { name: 'Bags', href: '#' },
-        { name: 'Tees', href: '#' },
-        { name: 'Objects', href: '#' },
-        { name: 'Home Goods', href: '#' },
-        { name: 'Accessories', href: '#' },
+    categories: [
+        { name: 'Sporting Events', href: '#' },
+        { name: 'Concerts', href: '#' },
+        { name: 'Seminars', href: '#' },
+        { name: 'Activities', href: '#' },
     ],
     company: [
         { name: 'Who we are', href: '#' },
-        { name: 'Sustainability', href: '#' },
         { name: 'Press', href: '#' },
         { name: 'Careers', href: '#' },
         { name: 'Terms & Conditions', href: '#' },
@@ -191,12 +159,10 @@ const footerNavigation = {
     ],
     customerService: [
         { name: 'Contact', href: '#' },
-        { name: 'Shipping', href: '#' },
-        { name: 'Returns', href: '#' },
-        { name: 'Warranty', href: '#' },
+        { name: 'Delivery', href: '#' },
+        { name: 'Cancellations', href: '#' },
         { name: 'Secure Payments', href: '#' },
         { name: 'FAQ', href: '#' },
-        { name: 'Find a store', href: '#' },
     ],
 }
 
@@ -235,7 +201,7 @@ export default function Example() {
                                     {navigation.categories.map((category) => (
                                         <Tab
                                             key={category.name}
-                                            className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-indigo-600 data-[selected]:text-indigo-600"
+                                            className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-orange-500 data-[selected]:text-orange-500"
                                         >
                                             {category.name}
                                         </Tab>
@@ -248,17 +214,12 @@ export default function Example() {
                                         <div className="grid grid-cols-2 gap-x-4 gap-y-10">
                                             {category.featured.map((item) => (
                                                 <div key={item.name} className="group relative">
-                                                    <img
-                                                        alt={item.imageAlt}
-                                                        src={item.imageSrc}
-                                                        className="aspect-square w-full rounded-md bg-gray-100 object-cover group-hover:opacity-75"
-                                                    />
                                                     <a href={item.href} className="mt-6 block text-sm font-medium text-gray-900">
                                                         <span aria-hidden="true" className="absolute inset-0 z-10" />
                                                         {item.name}
                                                     </a>
                                                     <p aria-hidden="true" className="mt-1 text-sm text-gray-500">
-                                                        Shop now
+                                                        View
                                                     </p>
                                                 </div>
                                             ))}
@@ -319,7 +280,7 @@ export default function Example() {
             <header className="relative">
                 <nav aria-label="Top">
                     {/* Top navigation */}
-                    <div className="bg-gray-900">
+                    <div className="bg-violet-950">
                         <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                             {/* Currency selector */}
                             <form>
@@ -328,7 +289,7 @@ export default function Example() {
                                         id="desktop-currency"
                                         name="currency"
                                         aria-label="Currency"
-                                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-gray-900 py-0.5 pl-2 pr-7 text-left text-base font-medium text-white focus:outline focus:outline-2 focus:-outline-offset-1 focus:outline-white sm:text-sm/6"
+                                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-violet-900 py-0.5 pl-2 pr-7 text-left text-base font-medium text-white focus:outline focus:outline-2 focus:-outline-offset-1 focus:outline-white sm:text-sm/6"
                                     >
                                         {currencies.map((currency) => (
                                             <option key={currency}>{currency}</option>
@@ -359,12 +320,8 @@ export default function Example() {
                                 {/* Logo (lg+) */}
                                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                                     <a href="#">
-                                        <span className="sr-only">Your Company</span>
-                                        <img
-                                            alt=""
-                                            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                                            className="h-8 w-auto"
-                                        />
+                                        <span className="sr-only">TigerTix</span>
+                                        <img src={clemsonLogo} alt="TigerTix Logo" className="h-8 w-auto" />
                                     </a>
                                 </div>
 
@@ -375,11 +332,11 @@ export default function Example() {
                                             {navigation.categories.map((category) => (
                                                 <Popover key={category.name} className="flex">
                                                     <div className="relative flex">
-                                                        <PopoverButton className="group relative flex items-center justify-center text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-[open]:text-indigo-600">
+                                                        <PopoverButton className="group relative flex items-center justify-center text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-[open]:text-orange-500">
                                                             {category.name}
                                                             <span
                                                                 aria-hidden="true"
-                                                                className="absolute inset-x-0 -bottom-px z-30 h-0.5 transition duration-200 ease-out group-data-[open]:bg-indigo-600"
+                                                                className="absolute inset-x-0 -bottom-px z-30 h-0.5 transition duration-200 ease-out group-data-[open]:bg-orange-500"
                                                             />
                                                         </PopoverButton>
                                                     </div>
@@ -394,17 +351,12 @@ export default function Example() {
                                                                 <div className="grid grid-cols-4 gap-x-8 gap-y-10 py-16">
                                                                     {category.featured.map((item) => (
                                                                         <div key={item.name} className="group relative">
-                                                                            <img
-                                                                                alt={item.imageAlt}
-                                                                                src={item.imageSrc}
-                                                                                className="aspect-square w-full rounded-md bg-gray-100 object-cover group-hover:opacity-75"
-                                                                            />
                                                                             <a href={item.href} className="mt-4 block font-medium text-gray-900">
                                                                                 <span aria-hidden="true" className="absolute inset-0 z-10" />
                                                                                 {item.name}
                                                                             </a>
                                                                             <p aria-hidden="true" className="mt-1">
-                                                                                Shop now
+                                                                                View
                                                                             </p>
                                                                         </div>
                                                                     ))}
@@ -451,10 +403,10 @@ export default function Example() {
 
                                 {/* Logo (lg-) */}
                                 <a href="#" className="lg:hidden">
-                                    <span className="sr-only">Your Company</span>
+                                    <span className="sr-only">TigerTix</span>
                                     <img
-                                        alt=""
-                                        src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                                        alt="TigerTix Logo"
+                                        src={clemsonLogo}
                                         className="h-8 w-auto"
                                     />
                                 </a>
@@ -498,15 +450,16 @@ export default function Example() {
                 <div className="relative">
                     {/* Background image and overlap */}
                     <div aria-hidden="true" className="absolute inset-0 hidden sm:flex sm:flex-col">
-                        <div className="relative w-full flex-1 bg-gray-800">
+                        <div className="relative w-full flex-1 bg-violet-700">
                             <div className="absolute inset-0 overflow-hidden">
                                 <img
                                     alt=""
-                                    src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-04-hero-full-width.jpg"
+                                    src={campus1}
                                     className="size-full object-cover"
                                 />
                             </div>
-                            <div className="absolute inset-0 bg-gray-900 opacity-50" />
+                            <div className="absolute inset-0 bg-slate-700 opacity-50" />
+                            <div className={ "absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50"}/>
                         </div>
                         <div className="h-32 w-full bg-white md:h-40 lg:h-48" />
                     </div>
@@ -514,15 +467,15 @@ export default function Example() {
                     <div className="relative mx-auto max-w-3xl px-4 pb-96 text-center sm:px-6 sm:pb-0 lg:px-8">
                         {/* Background image and overlap */}
                         <div aria-hidden="true" className="absolute inset-0 flex flex-col sm:hidden">
-                            <div className="relative w-full flex-1 bg-gray-800">
+                            <div className="relative w-full flex-1 bg-violet-700">
                                 <div className="absolute inset-0 overflow-hidden">
                                     <img
                                         alt=""
-                                        src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-04-hero-full-width.jpg"
+                                        src={campus1}
                                         className="size-full object-cover"
                                     />
                                 </div>
-                                <div className="absolute inset-0 bg-gray-900 opacity-50" />
+                                <div className="absolute inset-0 bg-violet-800 opacity-50" />
                             </div>
                             <div className="h-48 w-full bg-white" />
                         </div>
@@ -532,7 +485,7 @@ export default function Example() {
                             <div className="mt-4 sm:mt-6">
                                 <a
                                     href="#"
-                                    className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 font-medium text-white hover:bg-indigo-700"
+                                    className="inline-block rounded-md border border-transparent bg-orange-500 px-8 py-3 font-medium text-white hover:bg-orange-600"
                                 >
                                     Browse Upcoming Events
                                 </a>
@@ -552,14 +505,14 @@ export default function Example() {
                                 >
                                     <div aria-hidden="true" className="absolute inset-0 overflow-hidden rounded-lg">
                                         <div className="absolute inset-0 overflow-hidden group-hover:opacity-75">
-                                            <img alt={collection.imageAlt} src={collection.imageSrc} className="size-full object-cover" />
+                                            {/* <img alt={collection.imageAlt} src={collection.imageSrc} className="size-full object-cover" /> */}
                                         </div>
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50" />
                                     </div>
                                     <div className="absolute inset-0 flex items-end rounded-lg p-6">
                                         <div>
                                             <p aria-hidden="true" className="text-sm text-white">
-                                                Shop the collection
+                                                View Events
                                             </p>
                                             <h3 className="mt-1 font-semibold text-white">
                                                 <a href={collection.href}>
@@ -579,10 +532,10 @@ export default function Example() {
                     <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
                         <div className="md:flex md:items-center md:justify-between">
                             <h2 id="favorites-heading" className="text-2xl font-bold tracking-tight text-gray-900">
-                                Trending Tickets
+                                Trending Events
                             </h2>
-                            <a href="#" className="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 md:block">
-                                Shop the collection
+                            <a href="#" className="hidden text-sm font-medium text-orange-500 hover:text-orange-500 md:block">
+                                View Events
                                 <span aria-hidden="true"> &rarr;</span>
                             </a>
                         </div>
@@ -591,7 +544,7 @@ export default function Example() {
                             {trendingProducts.map((product) => (
                                 <div key={product.id} className="group relative">
                                     <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
-                                        <img alt={product.imageAlt} src={product.imageSrc} className="size-full object-cover" />
+                                        {/* <img alt={product.imageAlt} src={product.imageSrc} className="size-full object-cover" /> */}
                                     </div>
                                     <h3 className="mt-4 text-sm text-gray-700">
                                         <a href={product.href}>
@@ -606,8 +559,8 @@ export default function Example() {
                         </div>
 
                         <div className="mt-8 text-sm md:hidden">
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                Shop the collection
+                            <a href="#" className="font-medium text-orange-500 hover:text-orange-500">
+                                View Events
                                 <span aria-hidden="true"> &rarr;</span>
                             </a>
                         </div>
@@ -652,8 +605,8 @@ export default function Example() {
                             {/* Image section */}
                             <div className="col-span-1 md:col-span-2 lg:col-start-1 lg:row-start-1">
                                 <img
-                                    alt=""
-                                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                                    alt="TigerTix Logo"
+                                    src={clemsonLogo}
                                     className="h-8 w-auto"
                                 />
                             </div>
@@ -662,9 +615,9 @@ export default function Example() {
                             <div className="col-span-6 mt-10 grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-8 md:col-start-3 md:row-start-1 md:mt-0 lg:col-span-6 lg:col-start-2">
                                 <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
                                     <div>
-                                        <h3 className="text-sm font-medium text-gray-900">Products</h3>
+                                        <h3 className="text-sm font-medium text-gray-900">Categories</h3>
                                         <ul role="list" className="mt-6 space-y-6">
-                                            {footerNavigation.products.map((item) => (
+                                            {footerNavigation.categories.map((item) => (
                                                 <li key={item.name} className="text-sm">
                                                     <a href={item.href} className="text-gray-500 hover:text-gray-600">
                                                         {item.name}
@@ -711,12 +664,12 @@ export default function Example() {
                                         required
                                         autoComplete="email"
                                         aria-label="Email address"
-                                        className="block w-full rounded-md bg-white px-4 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                                        className="block w-full rounded-md bg-white px-4 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-orange-500"
                                     />
                                     <div className="ml-4 shrink-0">
                                         <button
                                             type="submit"
-                                            className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                            className="flex w-full items-center justify-center rounded-md border border-transparent bg-orange-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                                         >
                                             Sign up
                                         </button>
@@ -727,7 +680,7 @@ export default function Example() {
                     </div>
 
                     <div className="border-t border-gray-100 py-10 text-center">
-                        <p className="text-sm text-gray-500">&copy; 2021 Your Company, Inc. All rights reserved.</p>
+                        <p className="text-sm text-gray-500">&copy; 2024 TigerTix, Inc. All rights reserved.</p>
                     </div>
                 </div>
             </footer>
