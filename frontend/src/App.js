@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/homePage';
+import EventsPage from './pages/eventsPage';
+import NavBar from './components/NavBar';
 
 function App() {
   const [events, setEvents] = useState([]);
@@ -16,7 +19,13 @@ function App() {
   };
 
   return (
-    <HomePage events={events} onBuyTicket={buyTicket} />
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomePage events={events} onBuyTicket={buyTicket} />} />
+        <Route path="/events" element={<EventsPage />} />
+      </Routes>
+    </Router>
   );
 }
 
