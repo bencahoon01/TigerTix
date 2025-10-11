@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import ProductFilter from "../components/productFilter";
+import PurchaseButton from '../components/purchaseButton'
 
 export default function EventsPage() {
     const [events, setEvents] = useState([]);
@@ -48,7 +49,7 @@ export default function EventsPage() {
                                                 <p className="ml-4">{new Date(event.date).toLocaleDateString()}</p>
                                             </div>
                                             <p className="mt-1 text-sm text-gray-500">{event.location}</p>
-                                            <p className="mt-2 text-sm font-semibold text-indigo-600">{event.ticketsAvailable} tickets available</p>
+                                            <p className="mt-2 text-sm font-semibold text-indigo-600">{event.ticketsAvailable} tickets available <PurchaseButton/></p>
                                         </div>
                                     </li>
                                 ))}
