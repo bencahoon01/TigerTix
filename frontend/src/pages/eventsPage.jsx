@@ -35,16 +35,13 @@ export default function EventsPage() {
             });
 
             if (!response.ok) {
-                // Try to get a more specific error message from the server's response
                 const errorData = await response.json().catch(() => ({ message: 'Purchase failed.' }));
                 throw new Error(errorData.message || 'Purchase failed.');
             }
 
             console.log("Purchase successful, database updated.");
-            // Show a success popup to the user
             window.alert('Purchase successful!');
 
-            // Update the UI immediately to reflect the change
             setEvents(prevEvents =>
                 prevEvents.map(event =>
                     event.id === eventId
@@ -54,7 +51,6 @@ export default function EventsPage() {
             );
         } catch (err) {
             console.error("Purchase error:", err);
-            // Show an error popup to the user
             window.alert(`Error: ${err.message}`);
         }
     };
