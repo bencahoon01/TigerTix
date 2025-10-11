@@ -14,10 +14,10 @@ const db = new sqlite3.Database(dbPath, (err) => {
 /**
  * Inserts a new event into the database.
  * @param {object} event - The event object.
- * @param {string} event.name - The name of the event
- * @param {string} event.date - The date of the event
- * @param {number} event.ticketsAvailable - The number of available tickets
- * @returns {Promise<object>} A promise that resolves with the new event's ID
+ * @param {string} event.name - The name of the event.
+ * @param {string} event.date - The date of the event.
+ * @param {number} event.ticketsAvailable - The number of available tickets.
+ * @returns {Promise<object>} A promise that resolves with the new event's ID.
  */
 const createEvent = (event) => {
     return new Promise((resolve, reject) => {
