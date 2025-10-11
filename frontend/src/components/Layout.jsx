@@ -101,7 +101,7 @@ const footerNavigation = {
     ],
 }
 
-
+//The header and footer of the page
 export default function Layout({ children }) {
     const [open, setOpen] = useState(false)
 

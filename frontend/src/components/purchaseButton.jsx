@@ -1,3 +1,4 @@
+// green button that looks like those malware download buttons
 export default function PurchaseButton({ onClick, children = "Purchase" }) {
     return (
         <button
@@ -21,7 +22,6 @@ export default function PurchaseButton({ onClick, children = "Purchase" }) {
             "
             onClick={onClick}
         >
-            {/* Glossy overlay effect */}
             <div className="
                 absolute top-0 left-0 right-0 h-1/2
                 bg-gradient-to-b from-white/30 to-transparent

@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json()); // Middleware to parse JSON bodies
 
 // Routes
-// Mount under /api so POST /api/events is RESTful per requirements
+// Mount under /api so POST /api/events is RESTful
 app.use('/api', adminRoute);
 
 const PORT = 5001;
