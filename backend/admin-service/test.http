@@ -1,0 +1,59 @@
+### Create a new event
+POST http://localhost:5001/api/events
+Content-Type: application/json
+
+{
+  "name": "Spring Music Festival",
+  "date": "2025-12-01",
+  "ticketsAvailable": 500
+}
+
+### Create another event
+POST http://localhost:5001/api/events
+Content-Type: application/json
+
+{
+  "name": "Winter Gala",
+  "date": "2025-12-15",
+  "ticketsAvailable": 300
+}
+
+### Create event with minimal tickets
+POST http://localhost:5001/api/events
+Content-Type: application/json
+
+{
+  "name": "Exclusive VIP Dinner",
+  "date": "2025-11-20",
+  "ticketsAvailable": 50
+}
+
+### Test invalid request - missing name
+POST http://localhost:5001/api/events
+Content-Type: application/json
+
+{
+  "date": "2025-12-01",
+  "ticketsAvailable": 100
+}
+
+### Test invalid request - missing date
+POST http://localhost:5001/api/events
+Content-Type: application/json
+
+{
+  "name": "Invalid Event",
+  "ticketsAvailable": 100
+}
+
+### Test invalid request - missing ticketsAvailable
+POST http://localhost:5001/api/events
+Content-Type: application/json
+
+{
+  "name": "Invalid Event",
+  "date": "2025-12-01"
+}
+
+### Verify events were created (using client-service)
+GET http://localhost:6001/api/events
