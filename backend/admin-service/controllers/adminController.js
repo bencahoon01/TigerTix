@@ -6,33 +6,38 @@ const AdminModel = require('../models/adminModel.js');
  * @param {object} res - The Express response object.
  */
 const addEvent = async (req, res) => {
-    const { name, date, ticketsAvailable } = req.body;
+    const { name, date, ticketsAvailable } = req.body || {};
 
-    // Basic input validation
-    if (!name || !date || ticketsAvailable === undefined) {
-        return res.status(400).json({ message: 'Invalid input. Name, date, and ticketsAvailable are required.' }); // [cite: 132]
+    // Input validation
+    const errors = [];
+    if (typeof name !== 'string' || name.trim().length === 0) {
+        errors.push('name is required and must be a non-empty string ');
+    }
+    // Validate date: must be a valid date string
+    const parsedDate = new Date(date);
+    if (!date || isNaN(parsedDate.getTime())) {
+        errors.push('date is required and must be a valid date string');
+    }
+    // Validate ticketsAvailable: integer >= 0
+    const tickets = Number.isInteger(ticketsAvailable)
+        ? ticketsAvailable
+        : parseInt(ticketsAvailable, 10);
+    if (!Number.isFinite(tickets) || !Number.isInteger(tickets) || tickets < 0) {
+        errors.push('ticketsAvailable is required and must be an integer >= 0 ');
+    }
+
+    if (errors.length > 0) {
+        return res.status(400).json({ message: 'Invalid input.', errors });
     }
 
     try {
-        const newEvent = { name, date, ticketsAvailable: parseInt(ticketsAvailable, 10) };
+        const newEvent = { name: name.trim(), date, ticketsAvailable: tickets };
         const result = await AdminModel.createEvent(newEvent);
-        res.status(201).json(result);
+        return res.status(201).json(result);
     } catch (error) {
-        res.status(500).json({ message: 'Server error while creating event.', error: error.message }); // [cite: 132]
+        return res.status(500).json({ message: 'Server error while creating event.', error: error.message });
     }
 };
 
-const listEvents = async (req, res) => {
-    try {
-        const events = await AdminModel.getAllEvents();
-
-        res.status(200).json(events);
-    } catch (error) {
-        res.status(500).json({ message: 'Error fetching events', error: error.message });
-    }
-};
-
-
-
-module.exports = { addEvent, listEvents };
+module.exports = { addEvent };
 
