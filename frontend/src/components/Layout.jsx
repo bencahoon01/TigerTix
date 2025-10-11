@@ -73,6 +73,7 @@ const navigation = {
         },
     ],
     pages: [
+        { name: 'Home', href: '/' },
         { name: 'About', href: '#' },
         { name: 'Organizers', href: '#' },
     ],
@@ -105,7 +106,7 @@ export default function Layout({ children }) {
     const [open, setOpen] = useState(false)
 
     return (
-        <div className="bg-white">
+        <div className="bg-white flex flex-col min-h-screen">
             {/* Mobile menu */}
             <Dialog open={open} onClose={setOpen} className="relative z-40 lg:hidden">
                 <DialogBackdrop
@@ -165,11 +166,6 @@ export default function Layout({ children }) {
                         </TabGroup>
 
                         <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                            <div className="flow-root">
-                                <Link to="/" className="-m-2 block p-2 font-medium text-gray-900">
-                                    Home
-                                </Link>
-                            </div>
                             {navigation.pages.map((page) => (
                                 <div key={page.name} className="flow-root">
                                     <Link to={page.href} className="-m-2 block p-2 font-medium text-gray-900">
@@ -254,7 +250,7 @@ export default function Layout({ children }) {
                     </div>
 
                     {/* Secondary navigation */}
-                    <div className="bg-white">
+                    <div className="bg-white border-b border-gray-200 shadow-sm">
                         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                             <div className="flex h-16 items-center justify-between">
                                 {/* Logo (lg+) */}
@@ -269,7 +265,6 @@ export default function Layout({ children }) {
                                     {/* Flyout menus */}
                                     <PopoverGroup className="inset-x-0 bottom-0 px-4">
                                         <div className="flex h-full justify-center space-x-8">
-                                            <Link to="/" className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Home</Link>
                                             {navigation.categories.map((category) => (
                                                 <Popover key={category.name} className="flex">
                                                     <div className="relative flex">
@@ -386,7 +381,7 @@ export default function Layout({ children }) {
                 </nav>
             </header>
 
-            <main>
+            <main className="flex-grow">
                 {children}
             </main>
 
