@@ -41,6 +41,14 @@ export default function EventsPage() {
 
             console.log("Purchase successful, database updated.");
 
+            // Update the UI immediately to reflect the change
+            setEvents(prevEvents =>
+                prevEvents.map(event =>
+                    event.id === eventId
+                        ? { ...event, ticketsAvailable: event.ticketsAvailable - 1 }
+                        : event
+                )
+            );
         } catch (err) {
             console.error("Purchase error:", err);
         }
