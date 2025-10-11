@@ -2,6 +2,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   },
   "name": "backend",
@@ -9,13 +10,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "db:init": "node setup.js",
-    "start": "setup.js"
+    "db:init": "node admin-service/setup.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC"
 }
-
