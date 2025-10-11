@@ -70,10 +70,15 @@ export default function EventsPage() {
                 <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                     <h1 className="text-2xl font-bold tracking-tight text-gray-900">All Events</h1>
                     <ProductFilter />
-                    {loading && <p>Loading...</p>}
-                    {error && <p>{error}</p>}
-                    {!loading && !error && (
-                        <div className="mt-8 flow-root">
+                    {/* 
+                      This section uses aria-live to announce content changes to screen readers.
+                      When loading, it announces "Loading...". When content appears, it's announced.
+                    */}
+                    <div aria-live="polite" aria-atomic="true">
+                        {loading && <p>Loading...</p>}
+                        {error && <p role="alert">{error}</p>}
+                        {!loading && !error && (
+                            <div className="mt-8 flow-root">
                             <ul role="list" className="-my-8 divide-y divide-gray-200">
                                 {events.map((event) => (
                                     <li key={event.id} className="flex py-8">
@@ -91,8 +96,9 @@ export default function EventsPage() {
                                     </li>
                                 ))}
                             </ul>
-                        </div>
-                    )}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </Layout>

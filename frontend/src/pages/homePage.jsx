@@ -191,7 +191,7 @@ export default function HomePage() {
                                     <div className="bg-gray-50 px-4 py-4 sm:px-6">
                                         <p className="text-sm font-medium text-gray-900">{product.price}</p>
                                     </div>
-                                    <a href={product.href} className="absolute inset-0">
+                                    <a href={product.href} className="absolute inset-0" aria-label={`View ${product.name}`}>
                                         <span className="sr-only">View {product.name}</span>
                                     </a>
                                 </div>

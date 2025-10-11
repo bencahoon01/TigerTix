@@ -64,7 +64,7 @@ export default function ProductFilter() {
                 <div className="relative col-start-1 row-start-1 py-4">
                     <div className="mx-auto flex max-w-7xl divide-x divide-gray-200 px-4 text-sm sm:px-6 lg:px-8">
                         <div className="pr-6">
-                            <DisclosureButton className="group flex items-center font-medium text-gray-700">
+                            <DisclosureButton className="group flex items-center font-medium text-gray-700" aria-label="2 Filters applied">
                                 <FunnelIcon
                                     aria-hidden="true"
                                     className="mr-2 size-5 flex-none text-gray-400 group-hover:text-gray-500"
@@ -72,8 +72,8 @@ export default function ProductFilter() {
                                 2 Filters
                             </DisclosureButton>
                         </div>
-                        <div className="pl-6">
-                            <button type="button" className="text-gray-500">
+                        <div className="pl-6" aria-label="Clear all filters">
+                            <button type="button" className="text-gray-500" >
                                 Clear all
                             </button>
                         </div>
