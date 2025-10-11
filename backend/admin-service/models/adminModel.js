@@ -35,4 +35,17 @@ const createEvent = (event) => {
     });
 };
 
+const getEvents = async (req, res) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM events';
+        db.run(sql, (err, events) => {
+            if (err) {
+                reject(new Error('Database error: ' + err.message))
+            }
+            else {
+                resolve(events);
+            }
+        })
+    })
+}
 module.exports = { createEvent };
