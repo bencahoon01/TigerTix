@@ -10,10 +10,15 @@
   "description": "",
   "main": "admin-service/server.js",
   "scripts": {
-    "start": "node admin-service/server.js",
+    "start": "concurrently \"npm run start:admin\" \"npm run start:client\"",
+    "start:admin": "node admin-service/server.js",
+    "start:client": "node client-service/server.js",
     "db:init": "node admin-service/setup.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
 }
