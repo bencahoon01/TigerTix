@@ -8,9 +8,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "admin-service/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node admin-service/server.js",
     "db:init": "node admin-service/setup.js"
   },
   "keywords": [],
