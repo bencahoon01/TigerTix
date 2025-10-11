@@ -28,7 +28,6 @@ export default function EventsPage() {
         fetchEvents();
     }, []);
 
-    // STEP 1: The function that calls the API
     const handlePurchase = async (eventId) => {
         try {
             const response = await fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events/${eventId}/purchase`, {
@@ -36,10 +35,14 @@ export default function EventsPage() {
             });
 
             if (!response.ok) {
-                throw new Error('Purchase failed.');
+                // Try to get a more specific error message from the server's response
+                const errorData = await response.json().catch(() => ({ message: 'Purchase failed.' }));
+                throw new Error(errorData.message || 'Purchase failed.');
             }
 
             console.log("Purchase successful, database updated.");
+            // Show a success popup to the user
+            window.alert('Purchase successful!');
 
             // Update the UI immediately to reflect the change
             setEvents(prevEvents =>
@@ -51,6 +54,8 @@ export default function EventsPage() {
             );
         } catch (err) {
             console.error("Purchase error:", err);
+            // Show an error popup to the user
+            window.alert(`Error: ${err.message}`);
         }
     };
 
