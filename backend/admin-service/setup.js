@@ -14,8 +14,16 @@ db.serialize(() => {
             console.error('Failed to apply schema:', err.message);
         } else {
             console.log('Database tables created successfully.');
+
+            // Verify the data
+            db.all('SELECT * FROM events', [], (err, rows) => {
+                if (err) {
+                    console.error('Error verifying data:', err.message);
+                } else {
+                    console.log(`=Database has ${rows.length} events`);
+                }
+                db.close();
+            });
         }
     });
 });
-
-db.close();

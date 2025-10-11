@@ -8,12 +8,19 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "admin-service/server.js",
   "scripts": {
-    "start": "node server.js",
-    "db:init": "node admin-service/setup.js"
+    "start": "concurrently \"npm run start:admin\" \"npm run start:client\"",
+    "start:admin": "node admin-service/server.js",
+    "start:client": "node client-service/server.js",
+    "db:init": "node admin-service/setup.js",
+    "db:clean": "node admin-service/clean.js",
+    "db:reset": "npm run db:clean && npm run db:init"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
 }

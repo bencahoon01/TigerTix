@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/homePage';
+import EventsPage from './pages/eventsPage';
 
 function App() {
   const [events, setEvents] = useState([]);
@@ -16,17 +18,12 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Clemson Campus Events</h1>
-      <ul>
-        {events.map((event) => (
-          <li key={event.id}>
-            {event.name} - {event.date}{' '}
-            <button onClick={() => buyTicket(event.name)}>Buy Ticket</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage events={events} onBuyTicket={buyTicket} />} />
+        <Route path="/events" element={<EventsPage />} />
+      </Routes>
+    </Router>
   );
 }
 
