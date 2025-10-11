@@ -25,7 +25,7 @@ const getEvents = (callback) => {
  */
 const updateTicketCount = (eventId, callback) => {
     db.run(
-        'UPDATE events SET available_tickets = available_tickets - 1 WHERE id = ?',
+        'UPDATE events SET ticketsAvailable = ticketsAvailable - 1 WHERE id = ?',
         [eventId],
         callback
     );
