@@ -18,6 +18,7 @@ function App() {
   return (
     <div className="App">
       <h1>Clemson Campus Events</h1>
+        <h1 className="text-2xl text-blue-600 font-bold">Hello Tailwind!</h1>
       <ul>
         {events.map((event) => (
           <li key={event.id}>
