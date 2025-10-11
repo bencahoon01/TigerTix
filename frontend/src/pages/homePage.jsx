@@ -1,6 +1,7 @@
 'use client'
 
 import { Fragment } from 'react'
+import { Link } from 'react-router-dom';
 import Layout from '../components/Layout'
 import campus1 from '../assets/campus1.jpg'
 import football from '../assets/football.jpg'
@@ -10,19 +11,19 @@ import graduation from '../assets/graduation.jpg'
 const collections = [
     {
         name: "Sporting Events",
-        href: '/eventsPage',
+        href: '/events',
         imageSrc: football,
         imageAlt: 'A football game at Memorial Stadium',
     },
     {
         name: "Concerts",
-        href: '/eventsPage',
+        href: '/events',
         imageSrc: brooksconcert,
         imageAlt: 'A concert at the Brooks Center for the Performing Arts',
     },
     {
         name: 'Academic Events',
-        href: '/eventsPage',
+        href: '/events',
         imageSrc: graduation,
         imageAlt: 'A graduation ceremony at Littlejohn Coliseum',
     },
@@ -121,12 +122,12 @@ export default function HomePage() {
                             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">Tiger Tix</h1>
                             <h2 className="mt-4 text-lg font-medium text-gray-100">Search for and purchase tickets for events in the Clemson area</h2>
                             <div className="mt-4 sm:mt-6">
-                                <a
-                                    href="/eventsPage"
+                                <Link
+                                    to="/events"
                                     className="inline-block rounded-md border border-transparent bg-orange-500 px-8 py-3 font-medium text-white hover:bg-orange-600"
                                 >
                                     Browse Upcoming Events
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -153,10 +154,10 @@ export default function HomePage() {
                                                 View Events
                                             </p>
                                             <h3 className="mt-1 font-semibold text-white">
-                                                <a href={collection.href}>
+                                                <Link to={collection.href}>
                                                     <span className="absolute inset-0" />
                                                     {collection.name}
-                                                </a>
+                                                </Link>
                                             </h3>
                                         </div>
                                     </div>
@@ -172,10 +173,10 @@ export default function HomePage() {
                             <h2 id="favorites-heading" className="text-2xl font-bold tracking-tight text-gray-900">
                                 Trending Events
                             </h2>
-                            <a href="/eventsPage" className="hidden text-sm font-medium text-orange-500 hover:text-orange-500 md:block">
+                            <Link to="/events" className="hidden text-sm font-medium text-orange-500 hover:text-orange-500 md:block">
                                 View Events
                                 <span aria-hidden="true"> &rarr;</span>
-                            </a>
+                            </Link>
                         </div>
 
                         <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 lg:gap-x-8">
@@ -198,10 +199,10 @@ export default function HomePage() {
                         </div>
 
                         <div className="mt-8 text-sm md:hidden">
-                            <a href="/eventsPage" className="font-medium text-orange-500 hover:text-orange-500">
+                            <Link to="/events" className="font-medium text-orange-500 hover:text-orange-500">
                                 View Events
                                 <span aria-hidden="true"> &rarr;</span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </section>

@@ -1,6 +1,7 @@
 'use client'
 
 import { Fragment, useState } from 'react'
+import { Link } from 'react-router-dom';
 import {
     Dialog,
     DialogBackdrop,
@@ -33,19 +34,19 @@ const navigation = {
             featured: [
                 {
                     name: 'Sporting Events',
-                    href: '/eventsPage',
+                    href: '/events',
                 },
                 {
                     name: 'Concerts',
-                    href: '/eventsPage',
+                    href: '/events',
                 },
                 {
                     name: 'Seminars',
-                    href: '/eventsPage',
+                    href: '/events',
                 },
                 {
                     name: 'Activities',
-                    href: '/eventsPage',
+                    href: '/events',
                 },
             ],
         },
@@ -72,7 +73,6 @@ const navigation = {
         },
     ],
     pages: [
-        { name: 'Events', href: '/eventsPage' },
         { name: 'About', href: '#' },
         { name: 'Organizers', href: '#' },
     ],
@@ -149,10 +149,10 @@ export default function Layout({ children }) {
                                         <div className="grid grid-cols-2 gap-x-4 gap-y-10">
                                             {category.featured.map((item) => (
                                                 <div key={item.name} className="group relative">
-                                                    <a href={item.href} className="mt-6 block text-sm font-medium text-gray-900">
+                                                    <Link to={item.href} className="mt-6 block text-sm font-medium text-gray-900">
                                                         <span aria-hidden="true" className="absolute inset-0 z-10" />
                                                         {item.name}
-                                                    </a>
+                                                    </Link>
                                                     <p aria-hidden="true" className="mt-1 text-sm text-gray-500">
                                                         View
                                                     </p>
@@ -165,11 +165,16 @@ export default function Layout({ children }) {
                         </TabGroup>
 
                         <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+                            <div className="flow-root">
+                                <Link to="/" className="-m-2 block p-2 font-medium text-gray-900">
+                                    Home
+                                </Link>
+                            </div>
                             {navigation.pages.map((page) => (
                                 <div key={page.name} className="flow-root">
-                                    <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
+                                    <Link to={page.href} className="-m-2 block p-2 font-medium text-gray-900">
                                         {page.name}
-                                    </a>
+                                    </Link>
                                 </div>
                             ))}
                         </div>
@@ -254,16 +259,17 @@ export default function Layout({ children }) {
                             <div className="flex h-16 items-center justify-between">
                                 {/* Logo (lg+) */}
                                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
-                                    <a href="/">
+                                    <Link to="/">
                                         <span className="sr-only">TigerTix</span>
                                         <img src={clemsonLogo} alt="TigerTix Logo" className="h-8 w-auto" />
-                                    </a>
+                                    </Link>
                                 </div>
 
                                 <div className="z-10 hidden h-full lg:flex">
                                     {/* Flyout menus */}
                                     <PopoverGroup className="inset-x-0 bottom-0 px-4">
                                         <div className="flex h-full justify-center space-x-8">
+                                            <Link to="/" className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Home</Link>
                                             {navigation.categories.map((category) => (
                                                 <Popover key={category.name} className="flex">
                                                     <div className="relative flex">
@@ -286,10 +292,10 @@ export default function Layout({ children }) {
                                                                 <div className="grid grid-cols-4 gap-x-8 gap-y-10 py-16">
                                                                     {category.featured.map((item) => (
                                                                         <div key={item.name} className="group relative">
-                                                                            <a href={item.href} className="mt-4 block font-medium text-gray-900">
+                                                                            <Link to={item.href} className="mt-4 block font-medium text-gray-900">
                                                                                 <span aria-hidden="true" className="absolute inset-0 z-10" />
                                                                                 {item.name}
-                                                                            </a>
+                                                                            </Link>
                                                                             <p aria-hidden="true" className="mt-1">
                                                                                 View
                                                                             </p>
@@ -306,13 +312,13 @@ export default function Layout({ children }) {
                                                 </Popover>
                                             ))}
                                             {navigation.pages.map((page) => (
-                                                <a
+                                                <Link
                                                     key={page.name}
-                                                    href={page.href}
+                                                    to={page.href}
                                                     className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
                                                 >
                                                     {page.name}
-                                                </a>
+                                                </Link>
                                             ))}
                                         </div>
                                     </PopoverGroup>
@@ -337,14 +343,14 @@ export default function Layout({ children }) {
                                 </div>
 
                                 {/* Logo (lg-) */}
-                                <a href="/" className="lg:hidden">
+                                <Link to="/" className="lg:hidden">
                                     <span className="sr-only">TigerTix</span>
                                     <img
                                         alt="TigerTix Logo"
                                         src={clemsonLogo}
                                         className="h-8 w-auto"
                                     />
-                                </a>
+                                </Link>
 
                                 <div className="flex flex-1 items-center justify-end">
                                     <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
