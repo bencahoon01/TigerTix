@@ -46,13 +46,17 @@ const Chat = () => {
   };
 
   const handleVoiceInput = () => {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert('Speech recognition is not supported in this browser.');
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
     recognition.lang = 'en-US';
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
-
-    const beep = new Audio('https://www.soundjay.com/button/beep-07.wav');
-    beep.play();
 
     recognition.start();
 
@@ -82,19 +86,19 @@ const Chat = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-4 right-10 z-50">
       <button
         className="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg"
         onClick={toggleChat}
       >
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.455.09-.934.09-1.423C6 13.23 7.51 8.25 12 8.25c4.97 0 9 3.694 9 8.25Z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.455.09-.934.09-1.423C6 13.23 7.51 8.25 12 8.25c4.97 0 9 3.694 9 8.25Z" />
 </svg>
       </button>
       {isOpen && (
         <div className="bg-white rounded-lg shadow-lg w-80 h-96 flex flex-col">
           <div className="p-4 border-b flex justify-between items-center">
-            <h2 className="text-lg font-semibold">Tiger Tix Assistant</h2>
+            <h2 className="text-lg font-semibold">Jynxi</h2>
             <button onClick={toggleTts} className={`px-2 py-1 rounded-full text-sm ${isTtsEnabled ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
               {isTtsEnabled ? 'TTS ON' : 'TTS OFF'}
             </button>
