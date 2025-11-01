@@ -257,7 +257,7 @@ export default function Layout({ children }) {
                                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                                     <Link to="/">
                                         <span className="sr-only">TigerTix</span>
-                                        <img src={clemsonLogo} alt="TigerTix Logo" className="h-8 w-auto" />
+                                        <img src={clemsonLogo} alt="TigerTix homepage" className="h-8 w-auto" />
                                     </Link>
                                 </div>
 
@@ -341,7 +341,7 @@ export default function Layout({ children }) {
                                 <Link to="/" className="lg:hidden">
                                     <span className="sr-only">TigerTix</span>
                                     <img
-                                        alt="TigerTix Logo"
+                                        alt="TigerTix homepage"
                                         src={clemsonLogo}
                                         className="h-8 w-auto"
                                     />
