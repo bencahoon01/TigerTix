@@ -25,6 +25,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import clemsonLogo from '../assets/Clemson_Tigers_logo.svg'
+import Chat from './Chat'
 
 const currencies = ['USD']
 const navigation = {
@@ -384,6 +385,7 @@ export default function Layout({ children }) {
             <main className="flex-grow">
                 {children}
             </main>
+            <Chat />
 
             <footer aria-labelledby="footer-heading" className="bg-gray-50">
                 <h2 id="footer-heading" className="sr-only">
