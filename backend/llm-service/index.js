@@ -34,15 +34,19 @@ app.post('/api/chat', async (req, res) => {
         type: 'function',
         function: {
           name: 'propose_booking',
-          description: 'Propose a ticket booking for a specific event if and only if it exists in the provided list.',
+          description: 'Propose a ticket booking for a specific event. Parse both the event name and the number of tickets (amount) from the user input. If the user does not specify an amount, default to 1.',
           parameters: {
             type: 'object',
             properties: {
               eventName: {
                 type: 'string',
-                description: 'The name of the event to book a ticket for.',
-                enum: validEventNames, // Use the dynamic list of events.
+                description: 'The name of the event to book a ticket for.'
               },
+              amount: {
+                type: 'integer',
+                description: 'The number of tickets to purchase.',
+                default: 1
+              }
             },
             required: ['eventName'],
           },
@@ -53,7 +57,7 @@ app.post('/api/chat', async (req, res) => {
     // Direct Command Incantation!
     const systemMessage = {
       role: 'system',
-      content: `You are a helpful assistant for booking tickets. You can only book tickets for the following events: ${validEventNames.join(', ')}. Do not guess the event. If the user asks for an event not on this list, you must state that you cannot find it.`,
+      content: `You are a helpful assistant for booking tickets. You can only book tickets for the following events: ${validEventNames.join(', ')}. When the user asks to buy tickets, always extract both the event name and the number of tickets (amount) from their message. If the user does not specify an amount, default to 1. Do not guess the event. If the user asks for an event not on this list, you must state that you cannot find it.`,
     };
 
     const response = await openai.chat.completions.create({
@@ -82,33 +86,19 @@ app.post('/api/chat', async (req, res) => {
         if (eventObj && eventObj.id) {
           const amount = functionArgs.amount && Number(functionArgs.amount) > 0 ? Number(functionArgs.amount) : 1;
           // Log what the LLM is doing
-          console.log('LLM booking intent:', {
+          console.log('LLM booking intent (proposal only, no purchase):', {
             requestedEventName: functionArgs.eventName,
             matchedEvent: eventObj,
             eventId: eventObj.id,
-            amount
+            amount,
+            timestamp: new Date().toISOString()
           });
-          // Now purchase ticket using the id and amount
-          const purchaseUrl = `http://localhost:6001/api/events/${eventObj.id}/purchase`;
-          console.log('Calling purchase API:', purchaseUrl, 'with amount:', amount);
-          const purchaseResponse = await fetch(purchaseUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amount })
-          });
-          if (!purchaseResponse.ok) {
-            const errorMsg = await purchaseResponse.text();
-            console.error('Purchase API error:', errorMsg);
-            return res.status(400).json({ response: `Failed to purchase ticket: ${errorMsg}` });
-          }
-          const purchaseResult = await purchaseResponse.json();
-          console.log('Purchase API result:', purchaseResult);
+          // Only propose booking, do NOT call purchase API
           return res.json({
             action: 'propose_booking',
             eventName: eventObj.name,
             eventId: eventObj.id,
-            amount,
-            purchaseResult
+            amount
           });
         } else {
           console.warn('LLM could not find event for:', functionArgs.eventName, 'EventObj:', eventObj);

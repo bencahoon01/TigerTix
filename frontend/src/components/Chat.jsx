@@ -72,18 +72,26 @@ const Chat = ({ onBuyTicket }) => {
     }
   };
 
+  const [confirmDisabled, setConfirmDisabled] = useState(false);
   const handleConfirmPurchase = () => {
+    console.log('Confirm Purchase clicked', new Date().toISOString());
+    if (confirmDisabled) return;
+    setConfirmDisabled(true);
     const audio = new Audio(confirmSound);
     audio.play();
     if (proposedBooking && proposedBooking.eventId) {
       onBuyTicket(proposedBooking.eventId, proposedBooking.amount);
-      const newMessages = [...messages, { text: `Ticket purchased for ${proposedBooking.amount} ticket(s) to ${proposedBooking.eventName}.`, sender: 'llm' }];
+      // Remove any previous confirmation messages
+      const filteredMessages = messages.filter(m => !m.needsConfirmation);
+      const newMessages = [...filteredMessages, { text: `Ticket purchased for ${proposedBooking.amount} ticket(s) to ${proposedBooking.eventName}.`, sender: 'llm' }];
       setMessages(newMessages);
     } else {
-      const newMessages = [...messages, { text: `Could not complete purchase. Invalid event or ID.`, sender: 'llm' }];
+      const filteredMessages = messages.filter(m => !m.needsConfirmation);
+      const newMessages = [...filteredMessages, { text: `Could not complete purchase. Invalid event or ID.`, sender: 'llm' }];
       setMessages(newMessages);
     }
     setProposedBooking(null);
+    setTimeout(() => setConfirmDisabled(false), 1000);
   };
 
   const handleVoiceInput = () => {
@@ -160,8 +168,9 @@ const Chat = ({ onBuyTicket }) => {
                   <button
                     className="ml-2 bg-green-500 text-white rounded-full px-4 py-2 mt-2"
                     onClick={handleConfirmPurchase}
+                    disabled={confirmDisabled}
                   >
-                    Confirm Purchase
+                    {confirmDisabled ? 'Processing...' : 'Confirm Purchase'}
                   </button>
                 )}
               </div>
