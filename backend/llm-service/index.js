@@ -72,18 +72,25 @@ app.post('/api/chat', async (req, res) => {
 
       // 3. Absolute Judgment!
       if (functionName === 'propose_booking') {
-        if (validEventNames.includes(functionArgs.eventName)) {
-          // Lookup event by title to get the id
-          const lookupUrl = `http://localhost:6001/api/events/lookup?title=${encodeURIComponent(functionArgs.eventName)}`;
-          const lookupResponse = await fetch(lookupUrl);
-          if (!lookupResponse.ok) {
-            return res.status(404).json({ response: `Could not find event id for "${functionArgs.eventName}".` });
-          }
-          const eventObj = await lookupResponse.json();
-          // Determine ticket amount (default 1 if not specified)
+        // Robust event name matching
+        const requestedName = (functionArgs.eventName || '').trim().toLowerCase();
+        // Find best match: exact, then partial
+        let eventObj = events.find(e => e.name.trim().toLowerCase() === requestedName);
+        if (!eventObj) {
+          eventObj = events.find(e => requestedName && e.name.trim().toLowerCase().includes(requestedName));
+        }
+        if (eventObj && eventObj.id) {
           const amount = functionArgs.amount && Number(functionArgs.amount) > 0 ? Number(functionArgs.amount) : 1;
+          // Log what the LLM is doing
+          console.log('LLM booking intent:', {
+            requestedEventName: functionArgs.eventName,
+            matchedEvent: eventObj,
+            eventId: eventObj.id,
+            amount
+          });
           // Now purchase ticket using the id and amount
           const purchaseUrl = `http://localhost:6001/api/events/${eventObj.id}/purchase`;
+          console.log('Calling purchase API:', purchaseUrl, 'with amount:', amount);
           const purchaseResponse = await fetch(purchaseUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -91,18 +98,21 @@ app.post('/api/chat', async (req, res) => {
           });
           if (!purchaseResponse.ok) {
             const errorMsg = await purchaseResponse.text();
+            console.error('Purchase API error:', errorMsg);
             return res.status(400).json({ response: `Failed to purchase ticket: ${errorMsg}` });
           }
           const purchaseResult = await purchaseResponse.json();
+          console.log('Purchase API result:', purchaseResult);
           return res.json({
             action: 'propose_booking',
-            eventName: functionArgs.eventName,
+            eventName: eventObj.name,
             eventId: eventObj.id,
             amount,
             purchaseResult
           });
         } else {
-          res.json({ response: `Hmph! I can't book a ticket for "${functionArgs.eventName}" because that event doesn't exist, you dummy!` });
+          console.warn('LLM could not find event for:', functionArgs.eventName, 'EventObj:', eventObj);
+          return res.status(400).json({ response: `Could not find a valid event for "${functionArgs.eventName}". Please check the event name and try again.` });
         }
       } else {
         res.json({ response: 'A mysterious power is interfering... try again!' });

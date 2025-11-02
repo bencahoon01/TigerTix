@@ -47,11 +47,16 @@ const Chat = ({ onBuyTicket }) => {
       const data = await response.json();
 
       if (data.action === 'propose_booking') {
-        setProposedBooking(data.eventName);
-        const newMessagesWithLlm = [...newMessages, { text: `I can help with that. Would you like to buy a ticket for ${data.eventName}?`, sender: 'llm', needsConfirmation: true }];
+        // Store the full booking proposal (eventId, eventName, amount)
+        setProposedBooking({
+          eventId: data.eventId,
+          eventName: data.eventName,
+          amount: data.amount || 1
+        });
+        const newMessagesWithLlm = [...newMessages, { text: `I can help with that. Would you like to buy ${data.amount || 1} ticket(s) for ${data.eventName}?`, sender: 'llm', needsConfirmation: true }];
         setMessages(newMessagesWithLlm);
         if (isTtsEnabled) {
-          speak(`I can help with that. Would you like to buy a ticket for ${data.eventName}?`);
+          speak(`I can help with that. Would you like to buy ${data.amount || 1} ticket(s) for ${data.eventName}?`);
         }
       } else {
         const llmResponse = data.response;
@@ -70,9 +75,14 @@ const Chat = ({ onBuyTicket }) => {
   const handleConfirmPurchase = () => {
     const audio = new Audio(confirmSound);
     audio.play();
-    onBuyTicket(proposedBooking);
-    const newMessages = [...messages, { text: `Ticket purchased for ${proposedBooking}.`, sender: 'llm' }];
-    setMessages(newMessages);
+    if (proposedBooking && proposedBooking.eventId) {
+      onBuyTicket(proposedBooking.eventId, proposedBooking.amount);
+      const newMessages = [...messages, { text: `Ticket purchased for ${proposedBooking.amount} ticket(s) to ${proposedBooking.eventName}.`, sender: 'llm' }];
+      setMessages(newMessages);
+    } else {
+      const newMessages = [...messages, { text: `Could not complete purchase. Invalid event or ID.`, sender: 'llm' }];
+      setMessages(newMessages);
+    }
     setProposedBooking(null);
   };
 
