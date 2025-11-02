@@ -1,6 +1,5 @@
 'use client'
 
-import { Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout'
 import campus1 from '../assets/campus1.jpg'
@@ -81,9 +80,9 @@ const perks = [
     },
 ]
 
-export default function HomePage() {
+export default function HomePage({ onBuyTicket }) {
     return (
-        <Layout>
+        <Layout onBuyTicket={onBuyTicket}>
             <main>
                 {/* Hero section */}
                 <div className="relative">

@@ -103,7 +103,7 @@ const footerNavigation = {
 }
 
 //The header and footer of the page
-export default function Layout({ children }) {
+export default function Layout({ children, onBuyTicket }) {
     const [open, setOpen] = useState(false)
 
     return (
@@ -385,7 +385,7 @@ export default function Layout({ children }) {
             <main className="flex-grow">
                 {children}
             </main>
-            <Chat />
+            <Chat onBuyTicket={onBuyTicket} />
 
             <footer aria-labelledby="footer-heading" className="bg-gray-50">
                 <h2 id="footer-heading" className="sr-only">

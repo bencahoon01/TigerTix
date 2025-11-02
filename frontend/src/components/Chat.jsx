@@ -1,11 +1,24 @@
 
 import React, { useState, useEffect } from 'react';
+import confirmSound from '../assets/confirm-purchase.mp3';
 
-const Chat = () => {
+const Chat = ({ onBuyTicket }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isTtsEnabled, setIsTtsEnabled] = useState(true);
+  const [proposedBooking, setProposedBooking] = useState(null);
+
+  useEffect(() => {
+    const savedMessages = localStorage.getItem('chatMessages');
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('chatMessages', JSON.stringify(messages));
+  }, [messages]);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -32,17 +45,35 @@ const Chat = () => {
       });
 
       const data = await response.json();
-      const llmResponse = data.response;
 
-      const newMessagesWithLlm = [...newMessages, { text: llmResponse, sender: 'llm' }];
-      setMessages(newMessagesWithLlm);
+      if (data.action === 'propose_booking') {
+        setProposedBooking(data.eventName);
+        const newMessagesWithLlm = [...newMessages, { text: `I can help with that. Would you like to buy a ticket for ${data.eventName}?`, sender: 'llm', needsConfirmation: true }];
+        setMessages(newMessagesWithLlm);
+        if (isTtsEnabled) {
+          speak(`I can help with that. Would you like to buy a ticket for ${data.eventName}?`);
+        }
+      } else {
+        const llmResponse = data.response;
+        const newMessagesWithLlm = [...newMessages, { text: llmResponse, sender: 'llm' }];
+        setMessages(newMessagesWithLlm);
 
-      if (isTtsEnabled) {
-        speak(llmResponse);
+        if (isTtsEnabled) {
+          speak(llmResponse);
+        }
       }
     } catch (error) {
       console.error('Error communicating with LLM service:', error);
     }
+  };
+
+  const handleConfirmPurchase = () => {
+    const audio = new Audio(confirmSound);
+    audio.play();
+    onBuyTicket(proposedBooking);
+    const newMessages = [...messages, { text: `Ticket purchased for ${proposedBooking}.`, sender: 'llm' }];
+    setMessages(newMessages);
+    setProposedBooking(null);
   };
 
   const handleVoiceInput = () => {
@@ -85,6 +116,12 @@ const Chat = () => {
     setIsTtsEnabled(!isTtsEnabled);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
+
   return (
     <div className="fixed bottom-4 right-10 z-50">
       <button
@@ -109,6 +146,14 @@ const Chat = () => {
                 key={index}
                 className={`my-2 p-2 rounded-lg ${message.sender === 'user' ? 'bg-orange-500 text-white self-end' : 'bg-gray-200 self-start'}`}>
                 {message.text}
+                {message.needsConfirmation && (
+                  <button
+                    className="ml-2 bg-green-500 text-white rounded-full px-4 py-2 mt-2"
+                    onClick={handleConfirmPurchase}
+                  >
+                    Confirm Purchase
+                  </button>
+                )}
               </div>
             ))}
           </div>
@@ -119,6 +164,7 @@ const Chat = () => {
               placeholder="Type a message..."
               value={inputValue}
               onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
             />
             <button
               className="ml-2 bg-orange-500 text-white rounded-full px-4 py-2"

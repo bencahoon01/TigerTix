@@ -21,7 +21,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage events={events} onBuyTicket={buyTicket} />} />
-        <Route path="/events" element={<EventsPage />} />
+        <Route path="/events" element={<EventsPage onBuyTicket={buyTicket} />} />
       </Routes>
     </Router>
   );
