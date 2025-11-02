@@ -20,7 +20,7 @@ app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
 
   try {
-    // 1. Create a Direct Mana-Link: Fetch the real events from the client-service.
+    // Fetch the real events from the client-service.
     const eventsResponse = await fetch(CLIENT_SERVICE_URL);
     if (!eventsResponse.ok) {
       throw new Error('Failed to fetch events from client-service.');
@@ -28,7 +28,7 @@ app.post('/api/chat', async (req, res) => {
     const events = await eventsResponse.json();
     const validEventNames = events.map(event => event.name);
 
-    // 2. Dynamic Bounded Field: Create the tools with the live event data.
+    // Create the tools with the live event data.
     const tools = [
       {
         type: 'function',
@@ -54,7 +54,6 @@ app.post('/api/chat', async (req, res) => {
       },
     ];
 
-    // Direct Command Incantation!
     const systemMessage = {
       role: 'system',
       content: `You are a helpful assistant for booking tickets. You can only book tickets for the following events: ${validEventNames.join(', ')}. When the user asks to buy tickets, always extract both the event name and the number of tickets (amount) from their message. If the user does not specify an amount, default to 1. Do not guess the event. If the user asks for an event not on this list, you must state that you cannot find it.`,
@@ -74,7 +73,6 @@ app.post('/api/chat', async (req, res) => {
       const functionName = toolCall.function.name;
       const functionArgs = JSON.parse(toolCall.function.arguments);
 
-      // 3. Absolute Judgment!
       if (functionName === 'propose_booking') {
         // Robust event name matching
         const requestedName = (functionArgs.eventName || '').trim().toLowerCase();
