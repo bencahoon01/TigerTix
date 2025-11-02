@@ -5,12 +5,26 @@ import EventsPage from './pages/eventsPage';
 
 function App() {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events`)
-      .then((res) => res.json())
-      .then((data) => setEvents(data))
-      .catch((err) => console.error(err));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setEvents(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError('Failed to load events. Please try again later.');
+        setLoading(false);
+      });
   }, []);
 
   const buyTicket = (eventName) => {
@@ -21,7 +35,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage events={events} onBuyTicket={buyTicket} />} />
-        <Route path="/events" element={<EventsPage onBuyTicket={buyTicket} />} />
+        <Route path="/events" element={<EventsPage events={events} loading={loading} error={error} onBuyTicket={buyTicket} />} />
       </Routes>
     </Router>
   );

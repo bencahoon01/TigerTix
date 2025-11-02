@@ -1,92 +1,27 @@
-import { useState, useEffect, useRef } from 'react'; // 1. CHANGED: Import useRef
+import { useRef } from 'react';
 import Layout from '../components/Layout';
 import ProductFilter from "../components/productFilter";
-import PurchaseButton from '../components/purchaseButton'
+import PurchaseButton from '../components/purchaseButton';
 
-export default function EventsPage() {
-    const [events, setEvents] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    // 2. ADDED: Create a ref for the audio.
-    // (Make sure 'purchase-sound.mp3' matches your filename in the /public folder)
+export default function EventsPage({ events, loading, error, onBuyTicket }) {
     const purchaseSoundRef = useRef(new Audio('/purchase-sound.mp3'));
 
-    useEffect(() => {
-        /**
-         * Fetches all events from the server when the component mounts.
-         * Updates state with events data or sets an error message.
-         */
-        const fetchEvents = async () => {
-            try {
-                const response = await fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
-                setEvents(data);
-            } catch (e) {
-                console.error("Failed to fetch events:", e);
-                setError("Failed to load events. Please try again later.");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchEvents();
-    }, []);
-
-    /**
-     * Handles purchasing a ticket for a given event.
-     * Sends a POST request to the server and updates the UI.
-     * @param {number} eventId - The ID of the event to purchase a ticket for.
-     */
     const handlePurchase = async (eventId) => {
-        // 3. ADDED: Play the sound immediately on click
         try {
             purchaseSoundRef.current.play();
         } catch (e) {
             console.error("Error playing sound:", e);
         }
 
-        // --- Rest of your function continues below ---
-        try {
-            const response = await fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events/${eventId}/purchase`, {
-                method: 'POST',
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({ message: 'Purchase failed.' }));
-                throw new Error(errorData.message || 'Purchase failed.');
-            }
-
-            console.log("Purchase successful, database updated.");
-            // We can remove the window.alert if the sound provides feedback
-            // window.alert('Purchase successful!');
-
-            setEvents(prevEvents =>
-                prevEvents.map(event =>
-                    event.id === eventId
-                        ? { ...event, ticketsAvailable: event.ticketsAvailable - 1 }
-                        : event
-                )
-            );
-        } catch (err) {
-            console.error("Purchase error:", err);
-            window.alert(`Error: ${err.message}`);
-        }
+        onBuyTicket(eventId);
     };
 
     return (
-        // --- The rest of your return JSX stays exactly the same ---
-        <Layout>
+        <Layout onBuyTicket={onBuyTicket}>
             <div className="bg-white">
                 <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                     <h1 className="text-2xl font-bold tracking-tight text-gray-900">All Events</h1>
                     <ProductFilter />
-                    {/* This section uses aria-live to announce content changes to screen readers.
-                      When loading, it announces "Loading...". When content appears, it's announced.
-                    */}
                     <div aria-live="polite" aria-atomic="true">
                         {loading && <p>Loading...</p>}
                         {error && <p role="alert">{error}</p>}

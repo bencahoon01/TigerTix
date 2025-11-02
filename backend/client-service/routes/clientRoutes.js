@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const clientController = require('../controllers/clientController');
-const llmController = require('../../llm-agent/controllers/llmController');
 
 // Define GET and POST routes for client-specific functionality
 // GET route returns all events
