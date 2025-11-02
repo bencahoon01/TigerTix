@@ -27,10 +27,12 @@ function App() {
         });
   }, []);
 
-    const buyTicket = async (eventId) => {
+    const buyTicket = async (eventId, amount = 1) => {
       try {
         const response = await fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events/${eventId}/purchase`, {
           method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount })
         });
         const data = await response.json();
         alert(data.message || `Ticket purchased for: ${eventId}`);

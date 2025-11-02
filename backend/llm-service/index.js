@@ -73,9 +73,33 @@ app.post('/api/chat', async (req, res) => {
       // 3. Absolute Judgment!
       if (functionName === 'propose_booking') {
         if (validEventNames.includes(functionArgs.eventName)) {
-          res.json({
+          // Lookup event by title to get the id
+          const lookupUrl = `http://localhost:6001/api/events/lookup?title=${encodeURIComponent(functionArgs.eventName)}`;
+          const lookupResponse = await fetch(lookupUrl);
+          if (!lookupResponse.ok) {
+            return res.status(404).json({ response: `Could not find event id for "${functionArgs.eventName}".` });
+          }
+          const eventObj = await lookupResponse.json();
+          // Determine ticket amount (default 1 if not specified)
+          const amount = functionArgs.amount && Number(functionArgs.amount) > 0 ? Number(functionArgs.amount) : 1;
+          // Now purchase ticket using the id and amount
+          const purchaseUrl = `http://localhost:6001/api/events/${eventObj.id}/purchase`;
+          const purchaseResponse = await fetch(purchaseUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount })
+          });
+          if (!purchaseResponse.ok) {
+            const errorMsg = await purchaseResponse.text();
+            return res.status(400).json({ response: `Failed to purchase ticket: ${errorMsg}` });
+          }
+          const purchaseResult = await purchaseResponse.json();
+          return res.json({
             action: 'propose_booking',
             eventName: functionArgs.eventName,
+            eventId: eventObj.id,
+            amount,
+            purchaseResult
           });
         } else {
           res.json({ response: `Hmph! I can't book a ticket for "${functionArgs.eventName}" because that event doesn't exist, you dummy!` });
