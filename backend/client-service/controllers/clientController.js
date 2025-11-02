@@ -36,12 +36,15 @@ const updateTicketCount = async (req, res) => {
     }
 
     try {
-        ClientModel.updateTicketCount(id, (err) => {
-            if (err) {
-                return res.status(500).json({ message: 'Server error while updating ticket count.', error: err.message });
-            }
-            return res.status(200).json({ message: 'Ticket purchased successfully.' });
-        });
+            ClientModel.updateTicketCount(id, function (err) {
+                if (err) {
+                    console.error(`Error updating ticket count for event ${id}:`, err.message);
+                    return res.status(500).json({ message: 'Server error while updating ticket count.', error: err.message });
+                }
+                // 'this' is the statement context in sqlite3, contains changes property
+                console.log(`Ticket purchase attempted for event ${id}. Rows affected: ${this.changes}`);
+                return res.status(200).json({ message: 'Ticket purchased successfully.' });
+            });
     } catch (error) {
         return res.status(500).json({ message: 'Unexpected server error.', error: error.message });
     }

@@ -9,27 +9,54 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setEvents(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError('Failed to load events. Please try again later.');
-        setLoading(false);
-      });
+      fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events`)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setEvents(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setError('Failed to load events. Please try again later.');
+          setLoading(false);
+        });
   }, []);
 
-  const buyTicket = (eventName) => {
-    alert(`Ticket purchased for: ${eventName}`);
-  };
+    const buyTicket = async (eventId) => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events/${eventId}/purchase`, {
+          method: 'POST',
+        });
+        const data = await response.json();
+        alert(data.message || `Ticket purchased for: ${eventId}`);
+        // Re-fetch events to update ticket count in UI
+        setLoading(true);
+        fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events`)
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return res.json();
+          })
+          .then((data) => {
+            setEvents(data);
+            setLoading(false);
+          })
+          .catch((err) => {
+            console.error(err);
+            setError('Failed to load events. Please try again later.');
+            setLoading(false);
+          });
+      } catch (error) {
+        alert('Failed to purchase ticket.');
+        console.error(error);
+      }
+    };
 
   return (
     <Router>
