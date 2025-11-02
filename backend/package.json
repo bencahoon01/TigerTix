@@ -13,7 +13,7 @@
     "start": "concurrently \"npm run start:admin\" \"npm run start:client\" \"npm run start:llm\"",
     "start:admin": "node admin-service/server.js",
     "start:client": "node client-service/server.js",
-    "start:llm": "node llm-service/server.js",
+    "start:llm": "node llm-service/index.js",
     "db:init": "node admin-service/setup.js",
     "db:clean": "node admin-service/clean.js",
     "db:reset": "npm run db:clean && npm run db:init"
