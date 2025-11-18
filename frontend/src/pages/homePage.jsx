@@ -1,7 +1,6 @@
 'use client'
 
 import { Link } from 'react-router-dom';
-import Layout from '../components/Layout'
 import campus1 from '../assets/campus1.jpg'
 import football from '../assets/football.jpg'
 import brooksconcert from '../assets/brooksconcert.jpg'
@@ -82,7 +81,7 @@ const perks = [
 
 export default function HomePage({ onBuyTicket }) {
     return (
-        <Layout onBuyTicket={onBuyTicket}>
+        
             <main>
                 {/* Hero section */}
                 <div className="relative">
@@ -233,6 +232,6 @@ export default function HomePage({ onBuyTicket }) {
                     </div>
                 </section>
             </main>
-        </Layout>
+        
     )
 }

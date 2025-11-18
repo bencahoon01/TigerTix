@@ -79,6 +79,7 @@ function App() {
           <Route path="/" element={<HomePage events={events} onBuyTicket={buyTicket} />} />
           <Route path="/events" element={<EventsPage events={events} loading={loading} error={error} onBuyTicket={buyTicket} />} />
           <Route path="/signin" element={<SignInPage onSignIn={handleSignIn} />} />
+          <Route path="/signup" element={<SignUpPage onSignIn={handleSignIn} />} />
         </Routes>
       </Layout>
     </Router>
