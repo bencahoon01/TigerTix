@@ -2,7 +2,7 @@ const db = require('../database');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'random_ass_string_for_jwt_secret';
+const JWT_SECRET = 'random_string_for_jwt_secret';
 
 const authController = {};
 
