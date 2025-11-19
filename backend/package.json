@@ -2,9 +2,10 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "openai": "^6.9.1",
     "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7",
-    "jsonwebtoken": "^9.0.0"
+    "sqlite3": "^5.1.7"
   },
   "name": "backend",
   "version": "1.0.0",
