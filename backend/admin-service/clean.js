@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const dbPath = path.resolve(__dirname, '../shared-db/database.sqlite');
+const dbPath = path.resolve(__dirname, '../shared-db/database.db');
 
 // Delete existing database if it exists
 if (fs.existsSync(dbPath)) {

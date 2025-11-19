@@ -1,7 +1,10 @@
 const request = require('supertest');
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const adminRouter = require('../admin-service/routes/adminRoute.js');
 const clientRouter = require('../client-service/routes/clientRoutes.js');
+
+const JWT_SECRET = 'random_string_for_jwt_secret';
 
 // Setup express app
 const app = express();
@@ -11,10 +14,21 @@ app.use('/api', clientRouter);
 
 describe('Integration tests', () => {
     let eventId;
+    let authToken;
+
+    beforeAll(() => {
+        // Create a valid JWT token for admin operations
+        authToken = jwt.sign(
+            { id: 1, email: 'admin@test.com' },
+            JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+    });
 
     it('Admin can create an event', async () => {
         const res = await request(app)
             .post('/api/events')
+            .set('Authorization', `Bearer ${authToken}`)
             .send({
                 name: 'Integration Test Event',
                 date: '2025-12-31',
@@ -37,10 +51,10 @@ describe('Integration tests', () => {
     it('Client can purchase tickets', async () => {
         const purchaseRes = await request(app)
             .post(`/api/events/${eventId}/purchase`)
+            .set('Authorization', `Bearer ${authToken}`)
             .send({ amount: 3 });
 
         expect(purchaseRes.statusCode).toBe(200);
         expect(purchaseRes.body.message).toContain('Purchased 3 ticket');
     });
 });
-x

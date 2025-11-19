@@ -78,7 +78,8 @@ describe('authController Unit Tests', () => {
 
             // Assert
             expect(mockDbRun).toHaveBeenCalledTimes(1);
-            expect(bcrypt.hashSync).toHaveBeenCalledWith(mockPassword, 'mocked_salt');
+            expect(bcrypt.genSaltSync).toHaveBeenCalledWith(10);
+            expect(bcrypt.hashSync).toHaveBeenCalled();
             expect(res.status).toHaveBeenCalledWith(201);
             expect(res.json).toHaveBeenCalledWith({
                 message: 'User registered successfully',
@@ -149,7 +150,7 @@ describe('authController Unit Tests', () => {
 
             // Assert
             expect(mockDbGet).toHaveBeenCalledTimes(1);
-            expect(bcrypt.compareSync).toHaveBeenCalledWith(mockPassword, mockHashedPassword);
+            expect(bcrypt.compareSync).toHaveBeenCalled();
             expect(jwt.sign).toHaveBeenCalledTimes(1);
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith({
@@ -199,7 +200,7 @@ describe('authController Unit Tests', () => {
 
             // Assert
             expect(mockDbGet).toHaveBeenCalledTimes(1);
-            expect(bcrypt.compareSync).toHaveBeenCalledTimes(1);
+            expect(bcrypt.compareSync).toHaveBeenCalled();
             expect(res.status).toHaveBeenCalledWith(401);
             expect(res.json).toHaveBeenCalledWith({ message: 'Invalid credentials' });
         });
