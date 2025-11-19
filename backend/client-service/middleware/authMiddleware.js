@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-// A secure secret key for JWT. This must match the one used in the user-authentication service.
-// In a real application, this should be loaded from an environment variable.
-const JWT_SECRET = 'random_ass_string_for_jwt_secret';
+const JWT_SECRET = 'random_string_for_jwt_secret';
 
 const protect = (req, res, next) => {
     let token;
