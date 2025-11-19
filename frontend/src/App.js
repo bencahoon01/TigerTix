@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import HomePage from './pages/homePage';
 import EventsPage from './pages/eventsPage';
 import SignInPage from './pages/SignInPage';
@@ -13,6 +13,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { isAuthenticated, logout, token } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_CLIENT_API_URL}/api/events`)
@@ -46,8 +47,8 @@ function App() {
 
       if (response.status === 401) {
           logout();
-          // navigate('/signin'); // This line needs to be handled in a component that is a child of Router
           alert('Session expired. Please sign in again.');
+          navigate('/signin');
           return;
       }
 
@@ -83,22 +84,14 @@ function App() {
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         
-        {/* Protected Routes */}
+        {/* Public Routes */}
         <Route 
           path="/" 
-          element={
-            <ProtectedRoute>
-              <HomePage events={events} onBuyTicket={buyTicket} />
-            </ProtectedRoute>
-          } 
+          element={<HomePage events={events} onBuyTicket={buyTicket} />} 
         />
         <Route 
           path="/events" 
-          element={
-            <ProtectedRoute>
-              <EventsPage events={events} loading={loading} error={error} onBuyTicket={buyTicket} />
-            </ProtectedRoute>
-          } 
+          element={<EventsPage events={events} loading={loading} error={error} onBuyTicket={buyTicket} />} 
         />
       </Routes>
     </Layout>
