@@ -1,29 +1,34 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import clemsonLogo from '../assets/Clemson_Tigers_logo.svg';
+import { useAuth } from '../context/AuthContext'; // Import useAuth
 
-export default function SignUpPage({ onSignIn }) {
+export default function SignUpPage() { // Remove onSignIn prop
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { login } = useAuth(); // Get login from context
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setError(null); // Clear previous errors
     try {
-      const response = await fetch(`${process.env.REACT_APP_AUTH_API_URL}/auth/register`, {
+      const response = await fetch(`${process.env.REACT_APP_AUTH_API_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Registration failed');
+        // If server returns an error, use its message
+        throw new Error(data.message || 'Registration failed');
       }
 
-      const data = await response.json();
-      onSignIn({ email, token: data.token });
-      navigate('/');
+      // After successful registration, navigate to signin page
+      navigate('/signin');
     } catch (error) {
       setError(error.message);
     }
@@ -57,7 +62,7 @@ export default function SignUpPage({ onSignIn }) {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus-visible:outline-orange-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -77,7 +82,7 @@ export default function SignUpPage({ onSignIn }) {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus-visible:outline-orange-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>

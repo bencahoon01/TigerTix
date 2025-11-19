@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Connect to the shared SQLite database
-const dbPath = path.resolve(__dirname, '../../shared-db/database.sqlite');
+const dbPath = path.resolve(__dirname, '../../shared-db/database.db');
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
         console.error("Error connecting to the database:", err.message);

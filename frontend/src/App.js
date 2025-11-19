@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/homePage';
 import EventsPage from './pages/eventsPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import Layout from './components/Layout';
+import ProtectedRoute from './components/ProtectedRoute';
+import { useAuth } from './context/AuthContext';
 
 function App() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [user, setUser] = useState(null);
+  const { isAuthenticated, logout, token } = useAuth();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events`)
+    fetch(`${process.env.REACT_APP_CLIENT_API_URL}/api/events`)
       .then((res) => {
         if (!res.ok) {
           throw new Error('Network response was not ok');
@@ -33,16 +35,27 @@ function App() {
 
   const buyTicket = async (eventId, amount = 1) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events/${eventId}/purchase`, {
+      const response = await fetch(`${process.env.REACT_APP_CLIENT_API_URL}/api/events/${eventId}/purchase`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({ amount })
       });
+
+      if (response.status === 401) {
+          logout();
+          // navigate('/signin'); // This line needs to be handled in a component that is a child of Router
+          alert('Session expired. Please sign in again.');
+          return;
+      }
+
       const data = await response.json();
       alert(data.message || `Ticket purchased for: ${eventId}`);
       // Re-fetch events to update ticket count in UI
       setLoading(true);
-      fetch(`${process.env.REACT_APP_CLIENT_API_URL}/events`)
+      fetch(`${process.env.REACT_APP_CLIENT_API_URL}/api/events`)
         .then((res) => {
           if (!res.ok) {
             throw new Error('Network response was not ok');
@@ -64,26 +77,33 @@ function App() {
     }
   };
 
-  const handleSignIn = (userData) => {
-    setUser(userData);
-  };
-
-  const handleSignOut = () => {
-    setUser(null);
-  };
-
   return (
-    <Router>
-      <Layout user={user} onSignOut={handleSignOut}>
-        <Routes>
-          <Route path="/" element={<HomePage events={events} onBuyTicket={buyTicket} />} />
-          <Route path="/events" element={<EventsPage events={events} loading={loading} error={error} onBuyTicket={buyTicket} />} />
-          <Route path="/signin" element={<SignInPage onSignIn={handleSignIn} />} />
-          <Route path="/signup" element={<SignUpPage onSignIn={handleSignIn} />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <Layout onBuyTicket={buyTicket}>
+      <Routes>
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        
+        {/* Protected Routes */}
+        <Route 
+          path="/" 
+          element={
+            <ProtectedRoute>
+              <HomePage events={events} onBuyTicket={buyTicket} />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/events" 
+          element={
+            <ProtectedRoute>
+              <EventsPage events={events} loading={loading} error={error} onBuyTicket={buyTicket} />
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+    </Layout>
   );
 }
 
 export default App;
+

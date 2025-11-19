@@ -1,5 +1,13 @@
 -- Drop the table if it exists to start fresh
 DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS users;
+
+-- Create the users table
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
+);
 
 -- Create the events table
 CREATE TABLE events (

@@ -1,7 +1,7 @@
 'use client'
 
 import { Fragment, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import {
     Dialog,
     DialogBackdrop,
@@ -26,6 +26,7 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import clemsonLogo from '../assets/Clemson_Tigers_logo.svg'
 import Chat from './Chat'
+import { useAuth } from '../context/AuthContext'; // Import useAuth
 
 const currencies = ['USD']
 const navigation = {
@@ -102,11 +103,16 @@ const footerNavigation = {
     ],
 }
 
-export default function Layout({ children, onBuyTicket, user, onSignOut }) {
+export default function Layout({ children, onBuyTicket }) { // Removed user, onSignOut props
 
     const [open, setOpen] = useState(false)
+    const { isAuthenticated, user, logout } = useAuth(); // Use useAuth hook
+    const navigate = useNavigate();
 
-
+    const handleSignOut = () => {
+        logout();
+        navigate('/signin'); // Redirect to signin page after logout
+    };
 
     return (
 
@@ -250,31 +256,41 @@ export default function Layout({ children, onBuyTicket, user, onSignOut }) {
 
                         <div className="space-y-6 border-t border-gray-200 px-4 py-6">
 
-                            {user ? (
+                            {isAuthenticated ? (
 
-                                <div className="flow-root">
+                                <>
 
-                                    <a href="#" onClick={onSignOut} className="-m-2 block p-2 font-medium text-gray-900">
+                                    <div className="flow-root">
 
-                                        Sign out
+                                        <span className="-m-2 block p-2 font-medium text-gray-900">Logged in as {user?.email}</span>
 
-                                    </a>
+                                    </div>
 
-                                </div>
+                                    <div className="flow-root">
+
+                                        <a href="#" onClick={handleSignOut} className="-m-2 block p-2 font-medium text-gray-900">
+
+                                            Sign out
+
+                                        </a>
+
+                                    </div>
+
+                                </>
 
                             ) : (
 
                                 <>
 
-                                                                        <div className="flow-root">
+                                    <div className="flow-root">
 
-                                                                            <Link to="/signin" className="-m-2 block p-2 font-medium text-gray-900">
+                                        <Link to="/signin" className="-m-2 block p-2 font-medium text-gray-900">
 
-                                                                                Sign in
+                                            Sign in
 
-                                                                            </Link>
+                                        </Link>
 
-                                                                        </div>
+                                    </div>
 
                                 </>
 
@@ -386,13 +402,13 @@ export default function Layout({ children, onBuyTicket, user, onSignOut }) {
 
                             <div className="flex items-center space-x-6">
 
-                                {user ? (
+                                {isAuthenticated ? (
 
                                     <>
 
-                                        <span className="text-sm font-medium text-white">{user.email}</span>
+                                        <span className="text-sm font-medium text-white">Logged in as {user?.email}</span>
 
-                                        <a href="#" onClick={onSignOut} className="text-sm font-medium text-white hover:text-gray-100">
+                                        <a href="#" onClick={handleSignOut} className="text-sm font-medium text-white hover:text-gray-100">
 
                                             Sign out
 
@@ -404,11 +420,11 @@ export default function Layout({ children, onBuyTicket, user, onSignOut }) {
 
                                     <>
 
-                                                                                <Link to="/signin" className="text-sm font-medium text-white hover:text-gray-100">
+                                        <Link to="/signin" className="text-sm font-medium text-white hover:text-gray-100">
 
-                                                                                    Sign in
+                                            Sign in
 
-                                                                                </Link>
+                                        </Link>
 
                                     </>
 
@@ -456,83 +472,83 @@ export default function Layout({ children, onBuyTicket, user, onSignOut }) {
 
                                             {navigation.categories.map((category) => (
 
-                                                                                                <Popover key={category.name} className="flex">
+                                                <Popover key={category.name} className="flex">
 
-                                                                                                    <div className="relative flex">
+                                                    <div className="relative flex">
 
-                                                                                                        <PopoverButton className="group relative flex items-center justify-center text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-[open]:text-orange-500">
+                                                        <PopoverButton className="group relative flex items-center justify-center text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-[open]:text-orange-500">
 
-                                                                                                            {category.name}
+                                                            {category.name}
 
-                                                                                                            <span
+                                                            <span
 
-                                                                                                                aria-hidden="true"
+                                                                aria-hidden="true"
 
-                                                                                                                className="absolute inset-x-0 -bottom-px z-30 h-0.5 transition duration-200 ease-out group-data-[open]:bg-orange-500"
+                                                                className="absolute inset-x-0 -bottom-px z-30 h-0.5 transition duration-200 ease-out group-data-[open]:bg-orange-500"
 
-                                                                                                            />
+                                                            />
 
-                                                                                                        </PopoverButton>
+                                                        </PopoverButton>
 
-                                                                                                    </div>
+                                                    </div>
 
-                                                                                                    <PopoverPanel
+                                                    <PopoverPanel
 
-                                                                                                        transition
+                                                        transition
 
-                                                                                                        className="group/popover-panel absolute inset-x-0 top-full z-20 w-full bg-white text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                                                        className="group/popover-panel absolute inset-x-0 top-full z-20 w-full bg-white text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
 
-                                                                                                    >
+                                                    >
 
-                                                                                                        {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
+                                                        {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
 
-                                                                                                        <div aria-hidden="true" className="absolute inset-0 top-1/2 bg-white shadow" />
+                                                        <div aria-hidden="true" className="absolute inset-0 top-1/2 bg-white shadow" />
 
-                                                                                                        <div className="relative bg-white">
+                                                        <div className="relative bg-white">
 
-                                                                                                            <div className="mx-auto max-w-7xl px-8">
+                                                            <div className="mx-auto max-w-7xl px-8">
 
-                                                                                                                <div className="grid grid-cols-4 gap-x-8 gap-y-10 py-16">
+                                                                <div className="grid grid-cols-4 gap-x-8 gap-y-10 py-16">
 
-                                                                                                                    {category.featured.map((item) => (
+                                                                    {category.featured.map((item) => (
 
-                                                                                                                        <div key={item.name} className="group relative">
+                                                                        <div key={item.name} className="group relative">
 
-                                                                                                                            <Link to={item.href} className="mt-4 block font-medium text-gray-900">
+                                                                            <Link to={item.href} className="mt-4 block font-medium text-gray-900">
 
-                                                                                                                                <span aria-hidden="true" className="absolute inset-0 z-10" />
+                                                                                <span aria-hidden="true" className="absolute inset-0 z-10" />
 
-                                                                                                                                {item.name}
+                                                                                {item.name}
 
-                                                                                                                            </Link>
+                                                                            </Link>
 
-                                                                                                                            <p aria-hidden="true" className="mt-1">
+                                                                            <p aria-hidden="true" className="mt-1">
 
-                                                                                                                                View
+                                                                                View
 
-                                                                                                                            </p>
+                                                                            </p>
 
-                                                                                                                        </div>
+                                                                        </div>
 
-                                                                                                                    ))}
+                                                                    ))}
 
-                                                                                                                </div>
+                                                                </div>
 
-                                                                                                            </div>
+                                                            </div>
 
-                                                                                                        </div>
+                                                        </div>
 
-                                                                                                        {/* Presentational element to emulate a border that sits on top of the popover */}
+                                                        {/* Presentational element to emulate a border that sits on top of the popover */}
 
-                                                                                                        <div aria-hidden="true" className="absolute inset-0 top-0 z-10 mx-auto h-px max-w-7xl px-8">
+                                                        <div aria-hidden="true" className="absolute inset-0 top-0 z-10 mx-auto h-px max-w-7xl px-8">
 
-                                                                                                            <div className="h-px w-full bg-transparent transition-colors duration-200 ease-out group-data-[open]/popover-panel:bg-gray-200" />
+                                                            <div className="h-px w-full bg-transparent transition-colors duration-200 ease-out group-data-[open]/popover-panel:bg-gray-200" />
 
-                                                                                                        </div>
+                                                        </div>
 
-                                                                                                    </PopoverPanel>
+                                                    </PopoverPanel>
 
-                                                                                                </Popover>
+                                                </Popover>
 
                                             ))}
 

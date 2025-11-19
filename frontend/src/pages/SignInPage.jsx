@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import clemsonLogo from '../assets/Clemson_Tigers_logo.svg';
+import { useAuth } from '../context/AuthContext'; // Import useAuth
 
-export default function SignInPage({ onSignIn }) {
+export default function SignInPage() { // Remove onSignIn prop
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { login } = useAuth(); // Get login from context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = `${process.env.REACT_APP_AUTH_API_URL}/auth/login`;
+    setError(null); // Clear previous errors
+    const url = `${process.env.REACT_APP_AUTH_API_URL}/api/auth/login`;
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -18,12 +21,14 @@ export default function SignInPage({ onSignIn }) {
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Login failed');
+        // If server returns an error, use its message
+        throw new Error(data.message || 'Login failed');
       }
 
-      const data = await response.json();
-      onSignIn({ email, token: data.token });
+      login(data.token, data.user); // Update auth context
       navigate('/');
     } catch (error) {
       setError(error.message);
@@ -58,7 +63,7 @@ export default function SignInPage({ onSignIn }) {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus-visible:outline-orange-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -85,7 +90,7 @@ export default function SignInPage({ onSignIn }) {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus-visible:outline-orange-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
