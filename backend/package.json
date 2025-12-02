@@ -1,16 +1,20 @@
 {
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "openai": "^6.9.1",
     "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7",
-    "jsonwebtoken": "^9.0.0"
+    "sqlite3": "^5.1.7"
   },
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "TigerTix Backend - All microservices",
   "main": "admin-service/server.js",
   "scripts": {
+    "postinstall": "echo ✅ All backend dependencies installed",
     "start": "concurrently \"npm run start:admin\" \"npm run start:client\" \"npm run start:llm\" \"npm run start:auth\"",
     "start:admin": "node admin-service/server.js",
     "start:client": "node client-service/server.js",
@@ -19,6 +23,8 @@
     "db:init": "node admin-service/setup.js",
     "db:clean": "node admin-service/clean.js",
     "db:reset": "npm run db:clean && npm run db:init",
+    "pretest": "node tests/clean-test-results.js && npm run db:reset",
+    "test": "jest",
     "test:backend": "jest backend/tests --watchAll",
     "test:llm": "jest llm-service/tests --watchAll"
   },
@@ -28,6 +34,17 @@
   "devDependencies": {
     "concurrently": "^9.2.1",
     "jest": "^30.2.0",
+    "jest-fetch-mock": "^3.0.3",
     "supertest": "^7.1.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "reporters": [
+      "default",
+      "<rootDir>/tests/CustomReporter.js"
+    ],
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": ["text", "lcov", "html"]
   }
 }
