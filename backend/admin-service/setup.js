@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
 const path = require('path');
 
-const dbPath = path.resolve(__dirname, '../shared-db/database.sqlite');
+const dbPath = path.resolve(__dirname, '../shared-db/database.db');
 const db = new sqlite3.Database(dbPath);
 
 const schema = fs.readFileSync(path.resolve(__dirname, '../shared-db/init.sql'), 'utf8');

@@ -113,7 +113,10 @@ app.post('/api/chat', async (req, res) => {
     res.status(500).json({ error: 'Failed to get response from LLM.' });
   }
 });
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`LLM service listening at http://localhost:${port}`);
+    });
+}
 
-app.listen(port, () => {
-  console.log(`LLM service listening at http://localhost:${port}`);
-});
+module.exports = app;
