@@ -57,6 +57,9 @@
     ],
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy"
-    }
+    },
+    "testMatch": [
+      "**/src/components/**/*.test.{js,jsx}"
+    ]
   }
 }

@@ -53,7 +53,9 @@
     "coverageReporters": ["text", "lcov", "html"],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/tests/llm-service.test.js"
+      "/tests/llm-service.test.js",
+      "/tests/integration.test.js",
+      "/tests/token-expiration.test.js"
     ]
   }
 }

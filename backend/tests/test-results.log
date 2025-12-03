@@ -1,0 +1,103 @@
+═══════════════════════════════════════════════════════════
+                    TEST EXECUTION REPORT                  
+═══════════════════════════════════════════════════════════
+Generated: 2025-12-03T06:40:53.823Z
+
+─────────────────────────────────────────────────────────
+                       SUMMARY                            
+─────────────────────────────────────────────────────────
+Total Tests:    23
+✓ Passed:       23
+✗ Failed:       0
+⊘ Skipped:      0
+Pass Rate:      100.00%
+
+═══════════════════════════════════════════════════════════
+                   TESTS BY CATEGORY                       
+═══════════════════════════════════════════════════════════
+
+
+┌─ ADMIN SERVICE TESTS ────────────────────────────────────
+│ Total: 1 | ✓ Passed: 1 | ✗ Failed: 0 | ⊘ Skipped: 0
+├───────────────────────────────────────────────────────────
+│ ✓ should create a valid event
+│   Duration: 26ms
+└───────────────────────────────────────────────────────────
+
+┌─ CLIENT SERVICE TESTS ───────────────────────────────────
+│ Total: 6 | ✓ Passed: 6 | ✗ Failed: 0 | ⊘ Skipped: 0
+├───────────────────────────────────────────────────────────
+│ ✓ should fetch all events
+│   Duration: 10ms
+│
+│ ✓ should fetch an event by title
+│   Duration: 2ms
+│
+│ ✓ should update ticket count
+│   Duration: 1ms
+│
+│ ✓ getEvents returns events
+│   Duration: 2ms
+│
+│ ✓ updateTicketCount returns 200 on success
+│   Duration: 5ms
+│
+│ ✓ lookupEventByTitle returns 404 if not found
+│   Duration: 1ms
+└───────────────────────────────────────────────────────────
+
+┌─ AUTHENTICATION TESTS ───────────────────────────────────
+│ Total: 9 | ✓ Passed: 9 | ✗ Failed: 0 | ⊘ Skipped: 0
+├───────────────────────────────────────────────────────────
+│ ✓ 1. Successful registration returns 201 Created
+│   Duration: 8ms
+│
+│ ✓ 2. Missing email or password returns 400 Bad Request
+│   Duration: 1ms
+│
+│ ✓ 3. Duplicate email returns 409 Conflict
+│   Duration: 1ms
+│
+│ ✓ 4. General database error returns 500 Internal Server Error
+│   Duration: 3ms
+│
+│ ✓ 5. Successful login returns 200 OK with token and user data
+│   Duration: 2ms
+│
+│ ✓ 6. Missing email or password returns 400 Bad Request
+│   Duration: 1ms
+│
+│ ✓ 7. User not found returns 401 Unauthorized
+│   Duration: 1ms
+│
+│ ✓ 8. Incorrect password returns 401 Unauthorized
+│   Duration: 1ms
+│
+│ ✓ 9. General database error during query returns 500 Internal Server Error
+│   Duration: 1ms
+└───────────────────────────────────────────────────────────
+
+┌─ AUTHENTICATION INTEGRATION ─────────────────────────────
+│ Total: 7 | ✓ Passed: 7 | ✗ Failed: 0 | ⊘ Skipped: 0
+├───────────────────────────────────────────────────────────
+│ ✓ 1. POST /api/auth/register - Successfully registers a new user (201)
+│   Duration: 181ms
+│
+│ ✓ 2. POST /api/auth/register - Fails to register a duplicate user (409 Conflict)
+│   Duration: 118ms
+│
+│ ✓ 3. POST /api/auth/login - Successfully logs in the user (200) and gets JWT
+│   Duration: 110ms
+│
+│ ✓ 4. POST /api/auth/login - Fails to login with incorrect password (401)
+│   Duration: 99ms
+│
+│ ✓ 5. POST /api/auth/login - Fails to login with non-existent email (401)
+│   Duration: 6ms
+│
+│ ✓ 6. GET /api/protected - Fails without a valid JWT (401)
+│   Duration: 133ms
+│
+│ ✓ 7. GET /api/protected - Succeeds with a valid JWT (200)
+│   Duration: 6ms
+└───────────────────────────────────────────────────────────

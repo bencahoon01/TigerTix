@@ -1,0 +1,200 @@
+{
+  "timestamp": "2025-12-03T06:40:53.823Z",
+  "summary": {
+    "total": 23,
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0
+  },
+  "categories": {
+    "Admin Service Tests": {
+      "tests": [
+        {
+          "name": "should create a valid event",
+          "status": "passed",
+          "duration": 26,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.094Z"
+        }
+      ],
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "Client Service Tests": {
+      "tests": [
+        {
+          "name": "should fetch all events",
+          "status": "passed",
+          "duration": 10,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.145Z"
+        },
+        {
+          "name": "should fetch an event by title",
+          "status": "passed",
+          "duration": 2,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.145Z"
+        },
+        {
+          "name": "should update ticket count",
+          "status": "passed",
+          "duration": 1,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.145Z"
+        },
+        {
+          "name": "getEvents returns events",
+          "status": "passed",
+          "duration": 2,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.145Z"
+        },
+        {
+          "name": "updateTicketCount returns 200 on success",
+          "status": "passed",
+          "duration": 5,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.145Z"
+        },
+        {
+          "name": "lookupEventByTitle returns 404 if not found",
+          "status": "passed",
+          "duration": 1,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.145Z"
+        }
+      ],
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    "Authentication Tests": {
+      "tests": [
+        {
+          "name": "1. Successful registration returns 201 Created",
+          "status": "passed",
+          "duration": 8,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
+        },
+        {
+          "name": "2. Missing email or password returns 400 Bad Request",
+          "status": "passed",
+          "duration": 1,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
+        },
+        {
+          "name": "3. Duplicate email returns 409 Conflict",
+          "status": "passed",
+          "duration": 1,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
+        },
+        {
+          "name": "4. General database error returns 500 Internal Server Error",
+          "status": "passed",
+          "duration": 3,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
+        },
+        {
+          "name": "5. Successful login returns 200 OK with token and user data",
+          "status": "passed",
+          "duration": 2,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
+        },
+        {
+          "name": "6. Missing email or password returns 400 Bad Request",
+          "status": "passed",
+          "duration": 1,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
+        },
+        {
+          "name": "7. User not found returns 401 Unauthorized",
+          "status": "passed",
+          "duration": 1,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
+        },
+        {
+          "name": "8. Incorrect password returns 401 Unauthorized",
+          "status": "passed",
+          "duration": 1,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
+        },
+        {
+          "name": "9. General database error during query returns 500 Internal Server Error",
+          "status": "passed",
+          "duration": 1,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
+        }
+      ],
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0
+    },
+    "Authentication Integration": {
+      "tests": [
+        {
+          "name": "1. POST /api/auth/register - Successfully registers a new user (201)",
+          "status": "passed",
+          "duration": 181,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:58.123Z"
+        },
+        {
+          "name": "2. POST /api/auth/register - Fails to register a duplicate user (409 Conflict)",
+          "status": "passed",
+          "duration": 118,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:58.123Z"
+        },
+        {
+          "name": "3. POST /api/auth/login - Successfully logs in the user (200) and gets JWT",
+          "status": "passed",
+          "duration": 110,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:58.123Z"
+        },
+        {
+          "name": "4. POST /api/auth/login - Fails to login with incorrect password (401)",
+          "status": "passed",
+          "duration": 99,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:58.123Z"
+        },
+        {
+          "name": "5. POST /api/auth/login - Fails to login with non-existent email (401)",
+          "status": "passed",
+          "duration": 6,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:58.123Z"
+        },
+        {
+          "name": "6. GET /api/protected - Fails without a valid JWT (401)",
+          "status": "passed",
+          "duration": 133,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:58.123Z"
+        },
+        {
+          "name": "7. GET /api/protected - Succeeds with a valid JWT (200)",
+          "status": "passed",
+          "duration": 6,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:58.123Z"
+        }
+      ],
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    }
+  }
+}
