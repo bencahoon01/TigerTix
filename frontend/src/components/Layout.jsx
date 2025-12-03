@@ -654,7 +654,7 @@ export default function Layout({ children, onBuyTicket }) { // Removed user, onS
 
                                             <QuestionMarkCircleIcon aria-hidden="true" className="size-6" />
 
-                                        </button>tton>
+                                        </button>
 
                                         <button type="button" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
 
