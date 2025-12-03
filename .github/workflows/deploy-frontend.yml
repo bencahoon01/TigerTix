@@ -39,7 +39,7 @@ jobs:
         REACT_APP_ADMIN_API_URL: https://tigertix-backend-mrm3.onrender.com/api
         REACT_APP_CLIENT_API_URL: https://tigertix-backend-mrm3.onrender.com
         REACT_APP_AUTH_API_URL: https://tigertix-backend-mrm3.onrender.com
-        REACT_APP_LLM_API_URL: https://tigertix-backend-mrm3.onrender.com/llm
+        REACT_APP_LLM_API_URL: https://tigertix-backend-mrm3.onrender.com/api
     
     - name: Setup Pages
       uses: actions/configure-pages@v4
