@@ -29,7 +29,8 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const CLIENT_SERVICE_URL = 'http://localhost:3001/api/events';
+// Use internal localhost for events (same server)
+const CLIENT_SERVICE_URL = `http://localhost:${PORT}/api/events`;
 
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
