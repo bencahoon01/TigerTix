@@ -21,7 +21,6 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-    
   },
   "eslintConfig": {
     "extends": [
@@ -46,7 +45,9 @@
     "@testing-library/react": "^16.3.0",
     "autoprefixer": "^10.4.14",
     "gh-pages": "^6.3.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
+    "jest-axe": "^10.0.0",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.4.18"
   },
@@ -58,5 +59,4 @@
       "\\.(css|less|scss|sass)$": "identity-obj-proxy"
     }
   }
-  
 }

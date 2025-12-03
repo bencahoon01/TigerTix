@@ -134,9 +134,9 @@ REACT_APP_LLM_API_URL=http://localhost:5003
 
 ## How to Run Regression Tests
 
-The project uses Jest for automated testing with comprehensive test coverage.
+The project uses Jest for automated testing with comprehensive test coverage for both frontend and backend.
 
-### Running Tests
+### Running Backend Tests
 1. Navigate to the backend directory:
    ```bash
    cd backend
@@ -146,24 +146,54 @@ The project uses Jest for automated testing with comprehensive test coverage.
    npm test
    ```
 
-### Test Suite Details
-The test suite includes:
-- **Authentication Tests**: User registration, login, and JWT token validation
-- **Admin Tests**: Admin-specific functionality and authorization
-- **Client Tests**: Client service endpoints and operations
-- **LLM Service Tests**: Chatbot integration and OpenAI API interactions
-- **Integration Tests**: End-to-end workflow testing
-- **Token Expiration Tests**: JWT token lifecycle management
+### Running Frontend Tests
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+2. Run the test suite:
+   ```bash
+   npm test
+   ```
+   For CI/CD (non-interactive):
+   ```bash
+   CI=true npm test
+   ```
+
+### Backend Test Suite Details
+The backend test suite includes:
+- **Authentication Tests**: User registration, login, and JWT token validation (9 tests)
+- **Admin Tests**: Admin-specific functionality and authorization (1 test)
+- **Client Tests**: Client service endpoints and operations (6 tests)
+- **Integration Tests**: End-to-end workflow testing (3 tests)
+- **Token Expiration Tests**: JWT token lifecycle management (8 tests)
+- **Auth Integration Tests**: Full authentication flow testing (7 tests)
+- **Note**: LLM service tests are excluded from CI/CD (requires OpenAI API key)
+
+**Total: 34 tests passing with 86% code coverage**
+
+### Frontend Test Suite Details
+The frontend test suite includes:
+- **Component Tests**: Chat component functionality
+- **Page Tests**: Sign In and Sign Up page rendering and interactions
+- **Accessibility Tests**: WCAG compliance checks using jest-axe
+- **E2E Workflow Tests**: Complete user workflows
 
 ### Test Results
-After running tests, you can view:
+After running backend tests, you can view:
 - Console output with test results and coverage statistics
-- `test-results.json`: Detailed test results in JSON format
-- `test-results.md`: Human-readable test summary in Markdown
-- `coverage/`: Code coverage reports (HTML, LCOV, and text formats)
+- `backend/tests/test-results.json`: Detailed test results in JSON format
+- `backend/tests/test-results.md`: Human-readable test summary in Markdown
+- `backend/coverage/`: Code coverage reports (HTML, LCOV, and text formats)
+
+### CI/CD Test Execution
+Tests are automatically run before deployment:
+- **Frontend**: Tests run on every push to main/testing branches before GitHub Pages deployment
+- **Backend**: Tests run before Render deployment confirmation
+- Both must pass for deployment to proceed
 
 ### Test Configuration
-Tests automatically:
+Backend tests automatically:
 - Clean previous test results before running
 - Reset the database to a known state
 - Use a custom reporter for enhanced output

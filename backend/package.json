@@ -50,6 +50,10 @@
     ],
     "collectCoverage": true,
     "coverageDirectory": "coverage",
-    "coverageReporters": ["text", "lcov", "html"]
+    "coverageReporters": ["text", "lcov", "html"],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/tests/llm-service.test.js"
+    ]
   }
 }

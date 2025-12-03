@@ -30,6 +30,11 @@ jobs:
         cd frontend
         npm ci
     
+    - name: Run tests
+      run: |
+        cd frontend
+        CI=true npm test -- --passWithNoTests
+    
     - name: Build
       run: |
         cd frontend
