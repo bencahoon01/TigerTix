@@ -5,7 +5,12 @@ const clientRoute = require('./routes/clientRoutes.js');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://bencahoon01.github.io'
+  ]
+}));
 app.use(express.json()); // Middleware to parse JSON bodies
 
 // Routes

@@ -6,7 +6,12 @@ const app = express();
 const PORT = process.env.PORT_AUTH || 3004;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://bencahoon01.github.io'
+  ]
+}));
 app.use(express.json());
 
 // Routes
