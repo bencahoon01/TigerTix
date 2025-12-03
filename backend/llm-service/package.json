@@ -4,7 +4,7 @@
   "description": "A service to interact with an LLM.",
   "main": "index.js",
   "scripts": {
-    "start": "node --env-file=../../.env index.js",
+    "start": "node --env-file=../.env index.js",
     "test": "jest --watchAll"
   },
   "dependencies": {
