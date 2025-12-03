@@ -28,3 +28,5 @@ dist/
 # Database
 *.db
 *.sqlite
+
+DEPLOYMENT.md
