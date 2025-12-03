@@ -8,7 +8,6 @@ export default function SignUpPage() { // Remove onSignIn prop
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { login } = useAuth(); // Get login from context
 
   const handleSignUp = async (e) => {
     e.preventDefault();

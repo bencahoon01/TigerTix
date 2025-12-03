@@ -35,6 +35,7 @@ jobs:
         cd frontend
         npm run build
       env:
+        CI: false
         REACT_APP_ADMIN_API_URL: https://tigertix-backend.onrender.com/api
         REACT_APP_CLIENT_API_URL: https://tigertix-backend.onrender.com
         REACT_APP_AUTH_API_URL: https://tigertix-backend.onrender.com

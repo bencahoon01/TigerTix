@@ -268,11 +268,11 @@ export default function Layout({ children, onBuyTicket }) { // Removed user, onS
 
                                     <div className="flow-root">
 
-                                        <a href="#" onClick={handleSignOut} className="-m-2 block p-2 font-medium text-gray-900">
+                                        <button type="button" onClick={handleSignOut} className="-m-2 block p-2 font-medium text-gray-900">
 
                                             Sign out
 
-                                        </a>
+                                        </button>
 
                                     </div>
 
@@ -408,11 +408,11 @@ export default function Layout({ children, onBuyTicket }) { // Removed user, onS
 
                                         <span className="text-sm font-medium text-white">Logged in as {user?.email}</span>
 
-                                        <a href="#" onClick={handleSignOut} className="text-sm font-medium text-white hover:text-gray-100">
+                                        <button type="button" onClick={handleSignOut} className="text-sm font-medium text-white hover:text-gray-100">
 
                                             Sign out
 
-                                        </a>
+                                        </button>
 
                                     </>
 
@@ -602,13 +602,13 @@ export default function Layout({ children, onBuyTicket }) { // Removed user, onS
 
                                     {/* Search */}
 
-                                    <a href="#" className="ml-2 p-2 text-gray-400 hover:text-gray-500">
+                                    <button type="button" className="ml-2 p-2 text-gray-400 hover:text-gray-500">
 
                                         <span className="sr-only">Search</span>
 
                                         <MagnifyingGlassIcon aria-hidden="true" className="size-6" />
 
-                                    </a>
+                                    </button>
 
                                 </div>
 
@@ -636,11 +636,11 @@ export default function Layout({ children, onBuyTicket }) { // Removed user, onS
 
                                 <div className="flex flex-1 items-center justify-end">
 
-                                    <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
+                                    <button type="button" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
 
                                         Search
 
-                                    </a>
+                                    </button>
 
 
 
@@ -648,19 +648,19 @@ export default function Layout({ children, onBuyTicket }) { // Removed user, onS
 
                                         {/* Help */}
 
-                                        <a href="#" className="p-2 text-gray-400 hover:text-gray-500 lg:hidden">
+                                        <button type="button" className="p-2 text-gray-400 hover:text-gray-500 lg:hidden">
 
                                             <span className="sr-only">Help</span>
 
                                             <QuestionMarkCircleIcon aria-hidden="true" className="size-6" />
 
-                                        </a>
+                                        </button>tton>
 
-                                        <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
+                                        <button type="button" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
 
                                             Help
 
-                                        </a>
+                                        </button>
 
 
 
@@ -668,7 +668,7 @@ export default function Layout({ children, onBuyTicket }) { // Removed user, onS
 
                                         <div className="ml-4 flow-root lg:ml-8">
 
-                                            <a href="#" className="group -m-2 flex items-center p-2">
+                                            <button type="button" className="group -m-2 flex items-center p-2">
 
                                                 <ShoppingBagIcon
 
@@ -682,7 +682,7 @@ export default function Layout({ children, onBuyTicket }) { // Removed user, onS
 
                                                 <span className="sr-only">items in cart, view bag</span>
 
-                                            </a>
+                                            </button>
 
                                         </div>
 
@@ -754,7 +754,7 @@ export default function Layout({ children, onBuyTicket }) { // Removed user, onS
 
                                         <h3 className="text-sm font-medium text-gray-900">Categories</h3>
 
-                                        <ul role="list" className="mt-6 space-y-6">
+                                        <ul className="mt-6 space-y-6">
 
                                             {footerNavigation.categories.map((item) => (
 
@@ -778,7 +778,7 @@ export default function Layout({ children, onBuyTicket }) { // Removed user, onS
 
                                         <h3 className="text-sm font-medium text-gray-900">Company</h3>
 
-                                        <ul role="list" className="mt-6 space-y-6">
+                                        <ul className="mt-6 space-y-6">
 
                                             {footerNavigation.company.map((item) => (
 
@@ -804,7 +804,7 @@ export default function Layout({ children, onBuyTicket }) { // Removed user, onS
 
                                     <h3 className="text-sm font-medium text-gray-900">Customer Service</h3>
 
-                                    <ul role="list" className="mt-6 space-y-6">
+                                    <ul className="mt-6 space-y-6">
 
                                         {footerNavigation.customerService.map((item) => (
 
