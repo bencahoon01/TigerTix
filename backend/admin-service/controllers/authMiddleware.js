@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 
 // A secure secret key for JWT. This must match the one used in the user-authentication service.
 // Loaded from environment variable for security.

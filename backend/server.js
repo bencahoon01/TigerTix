@@ -3,8 +3,9 @@ const cors = require('cors');
 const OpenAI = require('openai');
 
 const app = express();
-const port = process.env.PORT_LLM || 5003;
+const PORT = process.env.PORT || 10000;
 
+// Middleware
 app.use(cors({
   origin: [
     'http://localhost:3000',
@@ -13,12 +14,23 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Import route handlers
+const adminRoutes = require('./admin-service/routes/adminRoute');
+const clientRoutes = require('./client-service/routes/clientRoutes');
+const authRoutes = require('./user-authentication/routes/authRoutes');
+
+// Mount routes
+app.use('/api', adminRoutes);      // Admin endpoints
+app.use('/api', clientRoutes);     // Client endpoints  
+app.use('/api/auth', authRoutes);  // Auth endpoints
+
+// LLM Service - inline implementation to avoid module conflicts
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// The client service is the source of truth for events.
-const CLIENT_SERVICE_URL = 'http://localhost:6001/api/events';
+// Use internal localhost for events (same server)
+const CLIENT_SERVICE_URL = `http://localhost:${PORT}/api/events`;
 
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
@@ -78,16 +90,13 @@ app.post('/api/chat', async (req, res) => {
       const functionArgs = JSON.parse(toolCall.function.arguments);
 
       if (functionName === 'propose_booking') {
-        // Robust event name matching
         const requestedName = (functionArgs.eventName || '').trim().toLowerCase();
-        // Find best match: exact, then partial
         let eventObj = events.find(e => e.name.trim().toLowerCase() === requestedName);
         if (!eventObj) {
           eventObj = events.find(e => requestedName && e.name.trim().toLowerCase().includes(requestedName));
         }
         if (eventObj && eventObj.id) {
           const amount = functionArgs.amount && Number(functionArgs.amount) > 0 ? Number(functionArgs.amount) : 1;
-          // Log what the LLM is doing
           console.log('LLM booking intent (proposal only, no purchase):', {
             requestedEventName: functionArgs.eventName,
             matchedEvent: eventObj,
@@ -95,7 +104,6 @@ app.post('/api/chat', async (req, res) => {
             amount,
             timestamp: new Date().toISOString()
           });
-          // Only propose booking, do NOT call purchase API
           return res.json({
             action: 'propose_booking',
             eventName: eventObj.name,
@@ -117,10 +125,12 @@ app.post('/api/chat', async (req, res) => {
     res.status(500).json({ error: 'Failed to get response from LLM.' });
   }
 });
-if (require.main === module) {
-    app.listen(port, () => {
-        console.log(`LLM service listening at http://localhost:${port}`);
-    });
-}
 
-module.exports = app;
+// Health check
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', message: 'TigerTix Backend Running' });
+});
+
+app.listen(PORT, () => {
+  console.log(`TigerTix unified backend running on port ${PORT}`);
+});

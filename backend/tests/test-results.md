@@ -1,6 +1,6 @@
 # Test Execution Report
 
-**Generated:** 2025-11-19T20:28:47.494Z
+**Generated:** 2025-12-03T06:40:53.823Z
 
 ---
 
@@ -8,11 +8,11 @@
 
 | Metric | Count |
 |--------|-------|
-| Total Tests | 37 |
-| ✅ Passed | 34 |
-| ❌ Failed | 3 |
+| Total Tests | 23 |
+| ✅ Passed | 23 |
+| ❌ Failed | 0 |
 | ⊘ Skipped | 0 |
-| **Pass Rate** | **91.89%** |
+| **Pass Rate** | **100.00%** |
 
 ---
 
@@ -24,7 +24,7 @@
 
 | Status | Test Name | Duration |
 |--------|-----------|----------|
-| ✅ | should create a valid event | 17ms |
+| ✅ | should create a valid event | 26ms |
 
 ### Client Service Tests
 
@@ -32,80 +32,28 @@
 
 | Status | Test Name | Duration |
 |--------|-----------|----------|
-| ✅ | should fetch all events | 8ms |
-| ✅ | should fetch an event by title | 1ms |
-| ✅ | should update ticket count | 2ms |
+| ✅ | should fetch all events | 10ms |
+| ✅ | should fetch an event by title | 2ms |
+| ✅ | should update ticket count | 1ms |
 | ✅ | getEvents returns events | 2ms |
-| ✅ | updateTicketCount returns 200 on success | 13ms |
+| ✅ | updateTicketCount returns 200 on success | 5ms |
 | ✅ | lookupEventByTitle returns 404 if not found | 1ms |
 
 ### Authentication Tests
 
-**Stats:** 9 total | ✅ 6 passed | ❌ 3 failed | ⊘ 0 skipped
+**Stats:** 9 total | ✅ 9 passed | ❌ 0 failed | ⊘ 0 skipped
 
 | Status | Test Name | Duration |
 |--------|-----------|----------|
-| ❌ | 1. Successful registration returns 201 Created | 77ms |
-| ✅ | 2. Missing email or password returns 400 Bad Request | 3ms |
-| ✅ | 3. Duplicate email returns 409 Conflict | 58ms |
-| ✅ | 4. General database error returns 500 Internal Server Error | 71ms |
-| ❌ | 5. Successful login returns 200 OK with token and user data | 1ms |
+| ✅ | 1. Successful registration returns 201 Created | 8ms |
+| ✅ | 2. Missing email or password returns 400 Bad Request | 1ms |
+| ✅ | 3. Duplicate email returns 409 Conflict | 1ms |
+| ✅ | 4. General database error returns 500 Internal Server Error | 3ms |
+| ✅ | 5. Successful login returns 200 OK with token and user data | 2ms |
 | ✅ | 6. Missing email or password returns 400 Bad Request | 1ms |
 | ✅ | 7. User not found returns 401 Unauthorized | 1ms |
-| ❌ | 8. Incorrect password returns 401 Unauthorized | 0ms |
-| ✅ | 9. General database error during query returns 500 Internal Server Error | 2ms |
-
-#### Failed Test Details
-
-**1. Successful registration returns 201 Created**
-```
-Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
-```
-
-**5. Successful login returns 200 OK with token and user data**
-```
-Error: expect(jest.fn()).toHaveBeenCalled()
-```
-
-**8. Incorrect password returns 401 Unauthorized**
-```
-Error: expect(jest.fn()).toHaveBeenCalled()
-```
-
-### Integration Tests
-
-**Stats:** 3 total | ✅ 3 passed | ❌ 0 failed | ⊘ 0 skipped
-
-| Status | Test Name | Duration |
-|--------|-----------|----------|
-| ✅ | Admin can create an event | 38ms |
-| ✅ | Client can fetch events including the new one | 6ms |
-| ✅ | Client can purchase tickets | 12ms |
-
-### Token Expiration Tests
-
-**Stats:** 8 total | ✅ 8 passed | ❌ 0 failed | ⊘ 0 skipped
-
-| Status | Test Name | Duration |
-|--------|-----------|----------|
-| ✅ | 1. Valid JWT token allows access to protected route | 38ms |
-| ✅ | 2. Expired JWT token returns 401 Unauthorized | 9ms |
-| ✅ | 3. Missing token returns 401 Unauthorized | 3ms |
-| ✅ | 4. Invalid token format returns 401 Unauthorized | 4ms |
-| ✅ | 5. Token with wrong secret returns 401 Unauthorized | 4ms |
-| ✅ | 6. JWT contains correct user information | 1ms |
-| ✅ | 7. JWT expires in 30 minutes | 1ms |
-| ✅ | 8. New login generates fresh token | 8ms |
-
-### LLM Service Tests
-
-**Stats:** 3 total | ✅ 3 passed | ❌ 0 failed | ⊘ 0 skipped
-
-| Status | Test Name | Duration |
-|--------|-----------|----------|
-| ✅ | 1. Successful LLM function call for booking (explicit amount) | 705ms |
-| ✅ | 2. Fails to fetch events from client-service | 8ms |
-| ✅ | 3. Robust matching: Event name contains non-word characters | 902ms |
+| ✅ | 8. Incorrect password returns 401 Unauthorized | 1ms |
+| ✅ | 9. General database error during query returns 500 Internal Server Error | 1ms |
 
 ### Authentication Integration
 
@@ -113,14 +61,14 @@ Error: expect(jest.fn()).toHaveBeenCalled()
 
 | Status | Test Name | Duration |
 |--------|-----------|----------|
-| ✅ | 1. POST /api/auth/register - Successfully registers a new user (201) | 89ms |
-| ✅ | 2. POST /api/auth/register - Fails to register a duplicate user (409 Conflict) | 67ms |
-| ✅ | 3. POST /api/auth/login - Successfully logs in the user (200) and gets JWT | 63ms |
-| ✅ | 4. POST /api/auth/login - Fails to login with incorrect password (401) | 60ms |
-| ✅ | 5. POST /api/auth/login - Fails to login with non-existent email (401) | 5ms |
-| ✅ | 6. GET /api/protected - Fails without a valid JWT (401) | 63ms |
-| ✅ | 7. GET /api/protected - Succeeds with a valid JWT (200) | 4ms |
+| ✅ | 1. POST /api/auth/register - Successfully registers a new user (201) | 181ms |
+| ✅ | 2. POST /api/auth/register - Fails to register a duplicate user (409 Conflict) | 118ms |
+| ✅ | 3. POST /api/auth/login - Successfully logs in the user (200) and gets JWT | 110ms |
+| ✅ | 4. POST /api/auth/login - Fails to login with incorrect password (401) | 99ms |
+| ✅ | 5. POST /api/auth/login - Fails to login with non-existent email (401) | 6ms |
+| ✅ | 6. GET /api/protected - Fails without a valid JWT (401) | 133ms |
+| ✅ | 7. GET /api/protected - Succeeds with a valid JWT (200) | 6ms |
 
 ---
 
-*Report generated by TigerTix Test Logger at 11/19/2025, 3:28:51 PM*
+*Report generated by TigerTix Test Logger at 12/3/2025, 1:40:58 AM*

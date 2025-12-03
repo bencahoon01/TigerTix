@@ -5,12 +5,17 @@ const adminRoute = require('./routes/adminRoute');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://bencahoon01.github.io'
+  ]
+}));
 app.use(express.json()); // Middleware to parse JSON bodies
 
 // Routes
 // Mount under /api so POST /api/events is RESTful
 app.use('/api', adminRoute);
 
-const PORT = 5001;
+const PORT = process.env.PORT_ADMIN || 5001;
 app.listen(PORT, () => console.log(`Admin service running at http://localhost:${PORT}`));

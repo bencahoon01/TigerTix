@@ -1,16 +1,16 @@
 ═══════════════════════════════════════════════════════════
                     TEST EXECUTION REPORT                  
 ═══════════════════════════════════════════════════════════
-Generated: 2025-11-19T20:28:47.494Z
+Generated: 2025-12-03T06:40:53.823Z
 
 ─────────────────────────────────────────────────────────
                        SUMMARY                            
 ─────────────────────────────────────────────────────────
-Total Tests:    37
-✓ Passed:       34
-✗ Failed:       3
+Total Tests:    23
+✓ Passed:       23
+✗ Failed:       0
 ⊘ Skipped:      0
-Pass Rate:      91.89%
+Pass Rate:      100.00%
 
 ═══════════════════════════════════════════════════════════
                    TESTS BY CATEGORY                       
@@ -21,50 +21,48 @@ Pass Rate:      91.89%
 │ Total: 1 | ✓ Passed: 1 | ✗ Failed: 0 | ⊘ Skipped: 0
 ├───────────────────────────────────────────────────────────
 │ ✓ should create a valid event
-│   Duration: 17ms
+│   Duration: 26ms
 └───────────────────────────────────────────────────────────
 
 ┌─ CLIENT SERVICE TESTS ───────────────────────────────────
 │ Total: 6 | ✓ Passed: 6 | ✗ Failed: 0 | ⊘ Skipped: 0
 ├───────────────────────────────────────────────────────────
 │ ✓ should fetch all events
-│   Duration: 8ms
+│   Duration: 10ms
 │
 │ ✓ should fetch an event by title
-│   Duration: 1ms
+│   Duration: 2ms
 │
 │ ✓ should update ticket count
-│   Duration: 2ms
+│   Duration: 1ms
 │
 │ ✓ getEvents returns events
 │   Duration: 2ms
 │
 │ ✓ updateTicketCount returns 200 on success
-│   Duration: 13ms
+│   Duration: 5ms
 │
 │ ✓ lookupEventByTitle returns 404 if not found
 │   Duration: 1ms
 └───────────────────────────────────────────────────────────
 
 ┌─ AUTHENTICATION TESTS ───────────────────────────────────
-│ Total: 9 | ✓ Passed: 6 | ✗ Failed: 3 | ⊘ Skipped: 0
+│ Total: 9 | ✓ Passed: 9 | ✗ Failed: 0 | ⊘ Skipped: 0
 ├───────────────────────────────────────────────────────────
-│ ✗ 1. Successful registration returns 201 Created
-│   Duration: 77ms
-│   Error: Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
+│ ✓ 1. Successful registration returns 201 Created
+│   Duration: 8ms
 │
 │ ✓ 2. Missing email or password returns 400 Bad Request
-│   Duration: 3ms
+│   Duration: 1ms
 │
 │ ✓ 3. Duplicate email returns 409 Conflict
-│   Duration: 58ms
+│   Duration: 1ms
 │
 │ ✓ 4. General database error returns 500 Internal Server Error
-│   Duration: 71ms
+│   Duration: 3ms
 │
-│ ✗ 5. Successful login returns 200 OK with token and user data
-│   Duration: 1ms
-│   Error: Error: expect(jest.fn()).toHaveBeenCalled()
+│ ✓ 5. Successful login returns 200 OK with token and user data
+│   Duration: 2ms
 │
 │ ✓ 6. Missing email or password returns 400 Bad Request
 │   Duration: 1ms
@@ -72,89 +70,34 @@ Pass Rate:      91.89%
 │ ✓ 7. User not found returns 401 Unauthorized
 │   Duration: 1ms
 │
-│ ✗ 8. Incorrect password returns 401 Unauthorized
-│   Duration: 0ms
-│   Error: Error: expect(jest.fn()).toHaveBeenCalled()
+│ ✓ 8. Incorrect password returns 401 Unauthorized
+│   Duration: 1ms
 │
 │ ✓ 9. General database error during query returns 500 Internal Server Error
-│   Duration: 2ms
-└───────────────────────────────────────────────────────────
-
-┌─ INTEGRATION TESTS ──────────────────────────────────────
-│ Total: 3 | ✓ Passed: 3 | ✗ Failed: 0 | ⊘ Skipped: 0
-├───────────────────────────────────────────────────────────
-│ ✓ Admin can create an event
-│   Duration: 38ms
-│
-│ ✓ Client can fetch events including the new one
-│   Duration: 6ms
-│
-│ ✓ Client can purchase tickets
-│   Duration: 12ms
-└───────────────────────────────────────────────────────────
-
-┌─ TOKEN EXPIRATION TESTS ─────────────────────────────────
-│ Total: 8 | ✓ Passed: 8 | ✗ Failed: 0 | ⊘ Skipped: 0
-├───────────────────────────────────────────────────────────
-│ ✓ 1. Valid JWT token allows access to protected route
-│   Duration: 38ms
-│
-│ ✓ 2. Expired JWT token returns 401 Unauthorized
-│   Duration: 9ms
-│
-│ ✓ 3. Missing token returns 401 Unauthorized
-│   Duration: 3ms
-│
-│ ✓ 4. Invalid token format returns 401 Unauthorized
-│   Duration: 4ms
-│
-│ ✓ 5. Token with wrong secret returns 401 Unauthorized
-│   Duration: 4ms
-│
-│ ✓ 6. JWT contains correct user information
 │   Duration: 1ms
-│
-│ ✓ 7. JWT expires in 30 minutes
-│   Duration: 1ms
-│
-│ ✓ 8. New login generates fresh token
-│   Duration: 8ms
-└───────────────────────────────────────────────────────────
-
-┌─ LLM SERVICE TESTS ──────────────────────────────────────
-│ Total: 3 | ✓ Passed: 3 | ✗ Failed: 0 | ⊘ Skipped: 0
-├───────────────────────────────────────────────────────────
-│ ✓ 1. Successful LLM function call for booking (explicit amount)
-│   Duration: 705ms
-│
-│ ✓ 2. Fails to fetch events from client-service
-│   Duration: 8ms
-│
-│ ✓ 3. Robust matching: Event name contains non-word characters
-│   Duration: 902ms
 └───────────────────────────────────────────────────────────
 
 ┌─ AUTHENTICATION INTEGRATION ─────────────────────────────
 │ Total: 7 | ✓ Passed: 7 | ✗ Failed: 0 | ⊘ Skipped: 0
 ├───────────────────────────────────────────────────────────
 │ ✓ 1. POST /api/auth/register - Successfully registers a new user (201)
-│   Duration: 89ms
+│   Duration: 181ms
 │
 │ ✓ 2. POST /api/auth/register - Fails to register a duplicate user (409 Conflict)
-│   Duration: 67ms
+│   Duration: 118ms
 │
 │ ✓ 3. POST /api/auth/login - Successfully logs in the user (200) and gets JWT
-│   Duration: 63ms
+│   Duration: 110ms
 │
 │ ✓ 4. POST /api/auth/login - Fails to login with incorrect password (401)
-│   Duration: 60ms
+│   Duration: 99ms
 │
 │ ✓ 5. POST /api/auth/login - Fails to login with non-existent email (401)
-│   Duration: 5ms
+│   Duration: 6ms
 │
 │ ✓ 6. GET /api/protected - Fails without a valid JWT (401)
-│   Duration: 63ms
+│   Duration: 133ms
 │
 │ ✓ 7. GET /api/protected - Succeeds with a valid JWT (200)
-│   Duration: 4ms
+│   Duration: 6ms
 └───────────────────────────────────────────────────────────

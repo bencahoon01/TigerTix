@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-11-19T20:28:47.494Z",
+  "timestamp": "2025-12-03T06:40:53.823Z",
   "summary": {
-    "total": 37,
-    "passed": 34,
-    "failed": 3,
+    "total": 23,
+    "passed": 23,
+    "failed": 0,
     "skipped": 0
   },
   "categories": {
@@ -12,9 +12,9 @@
         {
           "name": "should create a valid event",
           "status": "passed",
-          "duration": 17,
+          "duration": 26,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.222Z"
+          "timestamp": "2025-12-03T06:40:55.094Z"
         }
       ],
       "passed": 1,
@@ -26,44 +26,44 @@
         {
           "name": "should fetch all events",
           "status": "passed",
-          "duration": 8,
+          "duration": 10,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.238Z"
+          "timestamp": "2025-12-03T06:40:55.145Z"
         },
         {
           "name": "should fetch an event by title",
           "status": "passed",
-          "duration": 1,
+          "duration": 2,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.238Z"
+          "timestamp": "2025-12-03T06:40:55.145Z"
         },
         {
           "name": "should update ticket count",
           "status": "passed",
-          "duration": 2,
+          "duration": 1,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.238Z"
+          "timestamp": "2025-12-03T06:40:55.145Z"
         },
         {
           "name": "getEvents returns events",
           "status": "passed",
           "duration": 2,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.238Z"
+          "timestamp": "2025-12-03T06:40:55.145Z"
         },
         {
           "name": "updateTicketCount returns 200 on success",
           "status": "passed",
-          "duration": 13,
+          "duration": 5,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.238Z"
+          "timestamp": "2025-12-03T06:40:55.145Z"
         },
         {
           "name": "lookupEventByTitle returns 404 if not found",
           "status": "passed",
           "duration": 1,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.238Z"
+          "timestamp": "2025-12-03T06:40:55.145Z"
         }
       ],
       "passed": 6,
@@ -74,188 +74,69 @@
       "tests": [
         {
           "name": "1. Successful registration returns 201 Created",
-          "status": "failed",
-          "duration": 77,
-          "error": "Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)",
-          "timestamp": "2025-11-19T20:28:48.531Z"
+          "status": "passed",
+          "duration": 8,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
         },
         {
           "name": "2. Missing email or password returns 400 Bad Request",
           "status": "passed",
-          "duration": 3,
+          "duration": 1,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.531Z"
+          "timestamp": "2025-12-03T06:40:55.159Z"
         },
         {
           "name": "3. Duplicate email returns 409 Conflict",
           "status": "passed",
-          "duration": 58,
+          "duration": 1,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.531Z"
+          "timestamp": "2025-12-03T06:40:55.159Z"
         },
         {
           "name": "4. General database error returns 500 Internal Server Error",
           "status": "passed",
-          "duration": 71,
+          "duration": 3,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.531Z"
+          "timestamp": "2025-12-03T06:40:55.159Z"
         },
         {
           "name": "5. Successful login returns 200 OK with token and user data",
-          "status": "failed",
-          "duration": 1,
-          "error": "Error: expect(jest.fn()).toHaveBeenCalled()",
-          "timestamp": "2025-11-19T20:28:48.531Z"
+          "status": "passed",
+          "duration": 2,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
         },
         {
           "name": "6. Missing email or password returns 400 Bad Request",
           "status": "passed",
           "duration": 1,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.531Z"
+          "timestamp": "2025-12-03T06:40:55.159Z"
         },
         {
           "name": "7. User not found returns 401 Unauthorized",
           "status": "passed",
           "duration": 1,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.531Z"
+          "timestamp": "2025-12-03T06:40:55.159Z"
         },
         {
           "name": "8. Incorrect password returns 401 Unauthorized",
-          "status": "failed",
-          "duration": 0,
-          "error": "Error: expect(jest.fn()).toHaveBeenCalled()",
-          "timestamp": "2025-11-19T20:28:48.531Z"
+          "status": "passed",
+          "duration": 1,
+          "error": null,
+          "timestamp": "2025-12-03T06:40:55.159Z"
         },
         {
           "name": "9. General database error during query returns 500 Internal Server Error",
           "status": "passed",
-          "duration": 2,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:48.531Z"
-        }
-      ],
-      "passed": 6,
-      "failed": 3,
-      "skipped": 0
-    },
-    "Integration Tests": {
-      "tests": [
-        {
-          "name": "Admin can create an event",
-          "status": "passed",
-          "duration": 38,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:48.679Z"
-        },
-        {
-          "name": "Client can fetch events including the new one",
-          "status": "passed",
-          "duration": 6,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:48.679Z"
-        },
-        {
-          "name": "Client can purchase tickets",
-          "status": "passed",
-          "duration": 12,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:48.679Z"
-        }
-      ],
-      "passed": 3,
-      "failed": 0,
-      "skipped": 0
-    },
-    "Token Expiration Tests": {
-      "tests": [
-        {
-          "name": "1. Valid JWT token allows access to protected route",
-          "status": "passed",
-          "duration": 38,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:48.820Z"
-        },
-        {
-          "name": "2. Expired JWT token returns 401 Unauthorized",
-          "status": "passed",
-          "duration": 9,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:48.820Z"
-        },
-        {
-          "name": "3. Missing token returns 401 Unauthorized",
-          "status": "passed",
-          "duration": 3,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:48.820Z"
-        },
-        {
-          "name": "4. Invalid token format returns 401 Unauthorized",
-          "status": "passed",
-          "duration": 4,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:48.820Z"
-        },
-        {
-          "name": "5. Token with wrong secret returns 401 Unauthorized",
-          "status": "passed",
-          "duration": 4,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:48.820Z"
-        },
-        {
-          "name": "6. JWT contains correct user information",
-          "status": "passed",
           "duration": 1,
           "error": null,
-          "timestamp": "2025-11-19T20:28:48.820Z"
-        },
-        {
-          "name": "7. JWT expires in 30 minutes",
-          "status": "passed",
-          "duration": 1,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:48.820Z"
-        },
-        {
-          "name": "8. New login generates fresh token",
-          "status": "passed",
-          "duration": 8,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:48.820Z"
+          "timestamp": "2025-12-03T06:40:55.159Z"
         }
       ],
-      "passed": 8,
-      "failed": 0,
-      "skipped": 0
-    },
-    "LLM Service Tests": {
-      "tests": [
-        {
-          "name": "1. Successful LLM function call for booking (explicit amount)",
-          "status": "passed",
-          "duration": 705,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:50.098Z"
-        },
-        {
-          "name": "2. Fails to fetch events from client-service",
-          "status": "passed",
-          "duration": 8,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:50.098Z"
-        },
-        {
-          "name": "3. Robust matching: Event name contains non-word characters",
-          "status": "passed",
-          "duration": 902,
-          "error": null,
-          "timestamp": "2025-11-19T20:28:50.098Z"
-        }
-      ],
-      "passed": 3,
+      "passed": 9,
       "failed": 0,
       "skipped": 0
     },
@@ -264,51 +145,51 @@
         {
           "name": "1. POST /api/auth/register - Successfully registers a new user (201)",
           "status": "passed",
-          "duration": 89,
+          "duration": 181,
           "error": null,
-          "timestamp": "2025-11-19T20:28:51.158Z"
+          "timestamp": "2025-12-03T06:40:58.123Z"
         },
         {
           "name": "2. POST /api/auth/register - Fails to register a duplicate user (409 Conflict)",
           "status": "passed",
-          "duration": 67,
+          "duration": 118,
           "error": null,
-          "timestamp": "2025-11-19T20:28:51.158Z"
+          "timestamp": "2025-12-03T06:40:58.123Z"
         },
         {
           "name": "3. POST /api/auth/login - Successfully logs in the user (200) and gets JWT",
           "status": "passed",
-          "duration": 63,
+          "duration": 110,
           "error": null,
-          "timestamp": "2025-11-19T20:28:51.158Z"
+          "timestamp": "2025-12-03T06:40:58.123Z"
         },
         {
           "name": "4. POST /api/auth/login - Fails to login with incorrect password (401)",
           "status": "passed",
-          "duration": 60,
+          "duration": 99,
           "error": null,
-          "timestamp": "2025-11-19T20:28:51.158Z"
+          "timestamp": "2025-12-03T06:40:58.123Z"
         },
         {
           "name": "5. POST /api/auth/login - Fails to login with non-existent email (401)",
           "status": "passed",
-          "duration": 5,
+          "duration": 6,
           "error": null,
-          "timestamp": "2025-11-19T20:28:51.158Z"
+          "timestamp": "2025-12-03T06:40:58.123Z"
         },
         {
           "name": "6. GET /api/protected - Fails without a valid JWT (401)",
           "status": "passed",
-          "duration": 63,
+          "duration": 133,
           "error": null,
-          "timestamp": "2025-11-19T20:28:51.158Z"
+          "timestamp": "2025-12-03T06:40:58.123Z"
         },
         {
           "name": "7. GET /api/protected - Succeeds with a valid JWT (200)",
           "status": "passed",
-          "duration": 4,
+          "duration": 6,
           "error": null,
-          "timestamp": "2025-11-19T20:28:51.158Z"
+          "timestamp": "2025-12-03T06:40:58.123Z"
         }
       ],
       "passed": 7,

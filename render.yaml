@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: tigertix-backend
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm run db:init && npm start
+    envVars:
+      - key: PORT_ADMIN
+        value: 5001
+      - key: PORT_CLIENT
+        value: 6001
+      - key: PORT_AUTH
+        value: 3004
+      - key: PORT_LLM
+        value: 5003
+      - key: JWT_SECRET
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
